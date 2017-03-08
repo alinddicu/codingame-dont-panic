@@ -33,21 +33,5 @@
 			Check.That(driveParams.Elevators.Last().Floor).Equals(1);
 			Check.That(driveParams.Elevators.Last().Position).Equals(3);
 		}
-
-		private class ConsoleReaderSimulator
-		{
-			private readonly string[] _lines;
-			private int _currentLineCount;
-
-			public ConsoleReaderSimulator(params string[] lines)
-			{
-				_lines = lines;
-			}
-
-			public string ReadLine()
-			{
-				return _lines[_currentLineCount++];
-			}
-		}
 	}
 }

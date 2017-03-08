@@ -2,9 +2,69 @@
 {
 	using System;
 	using System.Collections.Generic;
+	
+	public class Player
+	{
+		static void Main(string[] args)
+		{
+			var driveParams = new DriveParams(Console.ReadLine);
+			var drive = new Drive(driveParams);
+
+			// game loop
+			while (true)
+			{
+				var turnParams = new TurnParams(Console.ReadLine);
+				
+				Console.WriteLine(drive.Decide(turnParams)); // action: WAIT or BLOCK
+			}
+		}
+	}
+
+	public enum TurnDecision
+	{
+		WAIT,
+		BLOCK
+	}
+
+	public enum Direction
+	{
+		LEFT,
+		RIGHT
+	}
 
 	public class Drive
 	{
+		private readonly DriveParams _driveParams;
+
+		public Drive(DriveParams driveParams)
+		{
+			_driveParams = driveParams;
+		}
+
+		public TurnDecision Decide(TurnParams turnParams)
+		{
+			throw new NotImplementedException();
+		}
+	}
+
+	public class TurnParams
+	{
+		public int CloneFloor { get; private set; }
+
+		public int ClonePosition { get; private set; }
+
+		public Direction Direction { get; private set; }
+
+		public TurnParams(Func<string> readLine)
+		{
+			var inputs = readLine().Split(' ');
+			// floor of the leading clone
+			CloneFloor = int.Parse(inputs[0]);
+			// position of the leading clone on its floor
+			ClonePosition = int.Parse(inputs[1]);
+			// direction of the leading clone: LEFT or RIGHT
+			Direction = (Direction)Enum.Parse(typeof(Direction), inputs[2]);
+		}
 	}
 
 	public class DriveParams
