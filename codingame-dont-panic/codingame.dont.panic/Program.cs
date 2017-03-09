@@ -100,18 +100,18 @@
 			var nbElevators = int.Parse(inputs[7]); // number of elevators
 			for (var i = 0; i < nbElevators; i++)
 			{
-				var elevatorInputs = readLine().Split(' ');
-				_elevators.Add(new Elevator(int.Parse(elevatorInputs[0]), int.Parse(elevatorInputs[1])));
+				_elevators.Add(new Elevator(readLine()));
 			}
 		}
 	}
 
 	public class Elevator
 	{
-		public Elevator(int floor, int position)
+		public Elevator(string readLine)
 		{
-			Floor = floor;
-			Position = position;
+			var elevatorInputs = readLine.Split(' ');
+			Floor = int.Parse(elevatorInputs[0]);
+			Position = int.Parse(elevatorInputs[1]);
 		}
 
 		public int Floor { get; private set; }
