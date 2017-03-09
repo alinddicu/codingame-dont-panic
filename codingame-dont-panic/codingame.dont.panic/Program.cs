@@ -67,6 +67,13 @@
 
 		public TurnDecision Decide(TurnParams turnParams)
 		{
+			if (turnParams.CloneFloor == _driveParams.ExitFloor
+			    && turnParams.ClonePosition < _driveParams.ExitPosition
+			    && turnParams.Direction == Direction.RIGHT)
+			{
+				return TurnDecision.WAIT;
+			}
+
 			throw new NotImplementedException();
 		}
 	}
