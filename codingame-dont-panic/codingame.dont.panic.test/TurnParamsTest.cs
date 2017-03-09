@@ -10,7 +10,7 @@ namespace codingame.dont.panic.test
 		[TestMethod]
 		public void GivenTurnParamsFromStandardInputWhenCreateThenValuesOfTurnParamsAreCorrect()
 		{
-			var simulator = new ConsoleReaderSimulator("8 7 RIGHT");
+			var simulator = new ConsoleSimulator("8 7 RIGHT");
 
 			var turnParams = new TurnParams(simulator.ReadLine);
 

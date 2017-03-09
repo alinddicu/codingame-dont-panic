@@ -5,17 +5,40 @@
 	
 	public class Player
 	{
-		static void Main(string[] args)
+		public static void Main(string[] args)
 		{
-			var driveParams = new DriveParams(Console.ReadLine);
-			var drive = new Drive(driveParams);
+			var drive = new Drive(Console.ReadLine, Console.WriteLine);
+			drive.Run();
+		}
+	}
+
+	public class Drive
+	{
+		private readonly Func<string> _readLine;
+		private readonly Action<object> _writeLine;
+
+		public Drive(Func<string> readLine, Action<object> writeLine)
+		{
+			_readLine = readLine;
+			_writeLine = writeLine;
+		}
+
+		public void Run()
+		{
+			var driveParams = new DriveParams(_readLine);
+			var drive = new CloneMaster(driveParams);
 
 			// game loop
 			while (true)
 			{
-				var turnParams = new TurnParams(Console.ReadLine);
-				
-				Console.WriteLine(drive.Decide(turnParams)); // action: WAIT or BLOCK
+				var turnParams = new TurnParams(_readLine);
+				if (turnParams.Direction == Direction.EXIT)
+				{
+					break;
+				}
+
+				var decision = drive.Decide(turnParams);
+				_writeLine(decision); // action: WAIT or BLOCK
 			}
 		}
 	}
@@ -29,14 +52,15 @@
 	public enum Direction
 	{
 		LEFT,
-		RIGHT
+		RIGHT,
+		EXIT
 	}
 
-	public class Drive
+	public class CloneMaster
 	{
 		private readonly DriveParams _driveParams;
 
-		public Drive(DriveParams driveParams)
+		public CloneMaster(DriveParams driveParams)
 		{
 			_driveParams = driveParams;
 		}
@@ -96,7 +120,7 @@
 			ExitFloor = int.Parse(inputs[3]); // floor on which the exit is found
 			ExitPosition = int.Parse(inputs[4]); // position of the exit on its floor
 			TotalClonesCount = int.Parse(inputs[5]); // number of generated clones
-			AdditionalElevatorsCount = int.Parse(inputs[6]); // ignore (always zero)
+			AdditionalElevatorsCount = int.Parse(inputs[6]); // number of additional elevators ignore (always zero)
 			var nbElevators = int.Parse(inputs[7]); // number of elevators
 			for (var i = 0; i < nbElevators; i++)
 			{
