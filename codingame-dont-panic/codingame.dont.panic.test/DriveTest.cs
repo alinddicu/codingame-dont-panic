@@ -27,8 +27,8 @@ namespace codingame.dont.panic.test
 		// Position = elevatorInputs[1];
 
 		// TurnParams
-		// CloneFloor = int.Parse(inputs[0]) = floor of the leading clone
-		// ClonePosition = int.Parse(inputs[1]) = position of the leading clone on its floor
+		// CloneFloor = inputs[0] = floor of the leading clone
+		// ClonePosition = inputs[1] = position of the leading clone on its floor
 		// Direction = inputs[2] = direction of the leading clone: LEFT or RIGHT
 
 		[TestMethod]
