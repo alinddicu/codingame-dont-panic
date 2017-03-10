@@ -2,7 +2,7 @@
 {
 	using System;
 	using System.Collections.Generic;
-	
+
 	public class Player
 	{
 		public static void Main(string[] args)
@@ -67,9 +67,20 @@
 
 		public TurnDecision Decide(TurnParams turnParams)
 		{
-			if (turnParams.CloneFloor == _driveParams.ExitFloor
-			    && turnParams.ClonePosition < _driveParams.ExitPosition
-			    && turnParams.Direction == Direction.RIGHT)
+			if (turnParams.ClonePosition == 0
+				&& turnParams.Direction == Direction.LEFT)
+			{
+				return TurnDecision.BLOCK;
+			}
+
+			if (turnParams.ClonePosition + 1 == _driveParams.DriveWidth
+				&& turnParams.Direction == Direction.RIGHT)
+			{
+				return TurnDecision.BLOCK;
+			}
+
+			if (turnParams.Direction == Direction.RIGHT
+				|| turnParams.Direction == Direction.LEFT)
 			{
 				return TurnDecision.WAIT;
 			}
@@ -101,19 +112,19 @@
 	public class DriveParams
 	{
 		private readonly List<Elevator> _elevators = new List<Elevator>();
-		
+
 		public int FloorCount { get; private set; }
-		
+
 		public int DriveWidth { get; private set; }
-		
+
 		public int MaximumRoundCount { get; private set; }
-		
+
 		public int ExitFloor { get; private set; }
-		
+
 		public int ExitPosition { get; private set; }
-		
+
 		public int TotalClonesCount { get; private set; }
-		
+
 		public int AdditionalElevatorsCount { get; private set; }
 
 		public IEnumerable<Elevator> Elevators => _elevators;

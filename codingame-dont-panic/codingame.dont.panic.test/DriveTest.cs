@@ -1,13 +1,8 @@
-﻿using NFluent;
-
-namespace codingame.dont.panic.test
+﻿namespace codingame.dont.panic.test
 {
-	using System;
 	using System.Collections.Generic;
-	using System.Linq;
-	using System.Text;
-	using System.Threading.Tasks;
 	using Microsoft.VisualStudio.TestTools.UnitTesting;
+	using NFluent;
 
 	[TestClass]
 	public class DriveTest
@@ -32,8 +27,48 @@ namespace codingame.dont.panic.test
 		// Direction = inputs[2] = direction of the leading clone: LEFT or RIGHT
 
 		[TestMethod]
-		public void Given1FloorDriveWithouElevatorWhenRunThenDecisionIsCorrect()
+		public void Given2FloorDriveWith1ElevatorEnteredFromRightWhenRunThenDecisionsAreCorrect()
 		{
+			// 11eE
+			// 0e00<-
+			var consoleSimulator = new ConsoleSimulator(
+				"2 4 99 1 3 2 0 1",
+				"0 1",
+				"0 3 LEFT", "0 2 LEFT", "0 1 LEFT", "1 1 LEFT", "1 0 LEFT",
+				"0 3 LEFT", "0 2 LEFT", "0 1 LEFT", "1 1 LEFT", "1 2 RIGHT", "1 3 RIGHT",
+				"1 3 EXIT");
+
+			var driveOuput = RunDrive(consoleSimulator);
+
+			Check.That(driveOuput).ContainsExactly(
+				"WAIT", "WAIT", "WAIT", "WAIT", "BLOCK",
+				"WAIT", "WAIT", "WAIT", "WAIT", "WAIT",
+				"BLOCK");
+		}
+
+		[TestMethod]
+		public void Given2FloorDriveWith1ElevatorAndUTurnWhenRunThenDecisionsAreCorrect()
+		{
+			//   E11
+			// ->0e0
+			var consoleSimulator = new ConsoleSimulator(
+				"2 3 10 1 0 2 0 1",
+				"0 1",
+				"0 0 RIGHT", "0 1 RIGHT", "1 1 RIGHT", "1 2 RIGHT",
+				"0 0 RIGHT", "0 1 RIGHT", "1 1 LEFT",
+				"1 0 EXIT");
+
+			var driveOuput = RunDrive(consoleSimulator);
+
+			Check.That(driveOuput).ContainsExactly(
+				"WAIT", "WAIT", "WAIT", "BLOCK",
+				"WAIT", "WAIT", "WAIT");
+		}
+
+		[TestMethod]
+		public void Given1FloorDriveWithoutElevatorWhenRunThenDecisionsAreCorrect()
+		{
+			// ->0000E
 			var consoleSimulator = new ConsoleSimulator(
 				"1 5 10 0 4 1 0 0",
 				"0 0 RIGHT",
