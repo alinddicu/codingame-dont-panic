@@ -72,13 +72,7 @@
 				return TurnDecision.BLOCK;
 			}
 
-			if (turnParams.Direction == Direction.RIGHT
-				|| turnParams.Direction == Direction.LEFT)
-			{
-				return TurnDecision.WAIT;
-			}
-
-			throw new NotImplementedException();
+			return TurnDecision.WAIT;
 		}
 	}
 

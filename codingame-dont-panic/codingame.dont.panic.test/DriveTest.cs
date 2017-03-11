@@ -36,14 +36,12 @@
 				"2 4 99 1 0 2 0 1",
 				"0 1",
 				"0 0 RIGHT", "0 1 RIGHT", "1 1 RIGHT", "1 2 RIGHT",
-				"0 0 RIGHT", "0 1 RIGHT", "1 1 LEFT",
 				"1 0 EXIT");
 
 			var driveOuput = RunDrive(consoleSimulator);
 
 			Check.That(driveOuput).ContainsExactly(
-				"WAIT", "WAIT", "WAIT", "BLOCK",
-				"WAIT", "WAIT", "WAIT");
+				"WAIT", "WAIT", "WAIT", "BLOCK");
 		}
 
 		[TestMethod]
