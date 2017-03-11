@@ -67,14 +67,7 @@
 
 		public TurnDecision Decide(TurnParams turnParams)
 		{
-			if (turnParams.ClonePosition == 0
-				&& turnParams.Direction == Direction.LEFT)
-			{
-				return TurnDecision.BLOCK;
-			}
-
-			if (turnParams.ClonePosition + 1 == _driveParams.DriveWidth
-				&& turnParams.Direction == Direction.RIGHT)
+			if (turnParams.IsLeftColision() || turnParams.IsRightColision(_driveParams.DriveWidth))
 			{
 				return TurnDecision.BLOCK;
 			}
@@ -106,6 +99,16 @@
 			ClonePosition = int.Parse(inputs[1]);
 			// direction of the leading clone: LEFT or RIGHT
 			Direction = (Direction)Enum.Parse(typeof(Direction), inputs[2]);
+		}
+
+		public bool IsLeftColision()
+		{
+			return ClonePosition == 0 && Direction == Direction.LEFT;
+		}
+
+		public bool IsRightColision(int driveWidth)
+		{
+			return ClonePosition + 1 == driveWidth && Direction == Direction.RIGHT;
 		}
 	}
 

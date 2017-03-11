@@ -27,6 +27,26 @@
 		// Direction = inputs[2] = direction of the leading clone: LEFT or RIGHT
 
 		[TestMethod]
+		[Ignore]
+		public void Given2By4DriveWith1ElevatorWithUTurnWhenRunThenBlock1StCloneImmediately()
+		{
+			//   E111
+			// ->0e00
+			var consoleSimulator = new ConsoleSimulator(
+				"2 4 99 1 0 2 0 1",
+				"0 1",
+				"0 0 RIGHT", "0 1 RIGHT", "1 1 RIGHT", "1 2 RIGHT",
+				"0 0 RIGHT", "0 1 RIGHT", "1 1 LEFT",
+				"1 0 EXIT");
+
+			var driveOuput = RunDrive(consoleSimulator);
+
+			Check.That(driveOuput).ContainsExactly(
+				"WAIT", "WAIT", "WAIT", "BLOCK",
+				"WAIT", "WAIT", "WAIT");
+		}
+
+		[TestMethod]
 		public void Given2FloorDriveWith1ElevatorEnteredFromRightWhenRunThenDecisionsAreCorrect()
 		{
 			// 11eE
