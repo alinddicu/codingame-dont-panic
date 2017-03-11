@@ -1,5 +1,6 @@
 namespace codingame.dont.panic.test
 {
+	using System;
 	using System.Collections.Generic;
 
 	public class ConsoleSimulator
@@ -13,10 +14,15 @@ namespace codingame.dont.panic.test
 			_linesToRead = linesToRead;
 		}
 
-		public List<string> WrittenLines => _writtenLines;
+		public IEnumerable<string> WrittenLines => _writtenLines;
 
 		public string ReadLine()
 		{
+			if (_readLinesCount >= _linesToRead.Length)
+			{
+				throw new ArgumentException("No more lines to read");
+			}
+
 			return _linesToRead[_readLinesCount++];
 		}
 
@@ -25,5 +31,4 @@ namespace codingame.dont.panic.test
 			_writtenLines.Add(obj.ToString());
 		}
 	}
-
 }

@@ -57,6 +57,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="ConsoleSimulator.cs" />
+    <Compile Include="ConsoleSimulatorTest.cs" />
     <Compile Include="DriveParamsTest.cs" />
     <Compile Include="DriveTest.cs" />
     <Compile Include="ElevatorTest.cs" />
