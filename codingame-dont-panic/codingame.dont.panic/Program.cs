@@ -75,9 +75,17 @@
 
 			var elevatorOnPreviousFloor = _driveParams.Elevators.FirstOrDefault(e => e.Floor == turnParams.CloneFloor - 1);
 			if (turnParams.ClonePosition > _driveParams.ExitPosition
-				&& turnParams.CloneFloor == _driveParams.ExitFloor
 				&& turnParams.Direction == Direction.RIGHT
+				&& turnParams.CloneFloor == _driveParams.ExitFloor
 				&& elevatorOnPreviousFloor?.Position + 1 == turnParams.ClonePosition)
+			{
+				return TurnDecision.BLOCK;
+			}
+
+			if (turnParams.ClonePosition < _driveParams.ExitPosition
+				&& turnParams.Direction == Direction.LEFT
+				&& turnParams.CloneFloor == _driveParams.ExitFloor
+				&& elevatorOnPreviousFloor?.Position - 1 == turnParams.ClonePosition)
 			{
 				return TurnDecision.BLOCK;
 			}
