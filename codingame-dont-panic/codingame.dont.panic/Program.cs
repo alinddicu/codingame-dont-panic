@@ -60,33 +60,61 @@
 	public class CloneMaster
 	{
 		private readonly DriveParams _driveParams;
+		private readonly int[] _blockedClonesPerFloor;
 
 		public CloneMaster(DriveParams driveParams)
 		{
 			_driveParams = driveParams;
+			_blockedClonesPerFloor = new int[driveParams.FloorCount];
 		}
 
 		public TurnDecision Decide(TurnParams turnParams)
 		{
 			if (turnParams.IsLeftColision() || turnParams.IsRightColision(_driveParams.DriveWidth))
 			{
+				_blockedClonesPerFloor[turnParams.CloneFloor]++;
 				return TurnDecision.BLOCK;
 			}
 
-			var elevatorOnPreviousFloor = _driveParams.Elevators.FirstOrDefault(e => e.Floor == turnParams.CloneFloor - 1);
+			var currentFloorElevator = _driveParams.Elevators.FirstOrDefault(e => e.Floor == turnParams.CloneFloor);
+			var previousFloorElevator = _driveParams.Elevators.FirstOrDefault(e => e.Floor == turnParams.CloneFloor - 1);
+			if (turnParams.ClonePosition > currentFloorElevator?.Position
+				&& turnParams.Direction == Direction.RIGHT
+				&& turnParams.CloneFloor == currentFloorElevator?.Floor
+				&& previousFloorElevator?.Position + 1 == turnParams.ClonePosition
+				&& _blockedClonesPerFloor[turnParams.CloneFloor] == 0)
+			{
+				_blockedClonesPerFloor[turnParams.CloneFloor]++;
+				return TurnDecision.BLOCK;
+			}
+
 			if (turnParams.ClonePosition > _driveParams.ExitPosition
 				&& turnParams.Direction == Direction.RIGHT
 				&& turnParams.CloneFloor == _driveParams.ExitFloor
-				&& elevatorOnPreviousFloor?.Position + 1 == turnParams.ClonePosition)
+				&& previousFloorElevator?.Position + 1 == turnParams.ClonePosition
+				&& _blockedClonesPerFloor[turnParams.CloneFloor] == 0)
 			{
+				_blockedClonesPerFloor[turnParams.CloneFloor]++;
+				return TurnDecision.BLOCK;
+			}
+
+			if (turnParams.ClonePosition < currentFloorElevator?.Position
+				&& turnParams.Direction == Direction.LEFT
+				&& turnParams.CloneFloor == currentFloorElevator?.Floor
+				&& previousFloorElevator?.Position - 1 == turnParams.ClonePosition
+				&& _blockedClonesPerFloor[turnParams.CloneFloor] == 0)
+			{
+				_blockedClonesPerFloor[turnParams.CloneFloor]++;
 				return TurnDecision.BLOCK;
 			}
 
 			if (turnParams.ClonePosition < _driveParams.ExitPosition
 				&& turnParams.Direction == Direction.LEFT
 				&& turnParams.CloneFloor == _driveParams.ExitFloor
-				&& elevatorOnPreviousFloor?.Position - 1 == turnParams.ClonePosition)
+				&& previousFloorElevator?.Position - 1 == turnParams.ClonePosition
+				&& _blockedClonesPerFloor[turnParams.CloneFloor] == 0)
 			{
+				_blockedClonesPerFloor[turnParams.CloneFloor]++;
 				return TurnDecision.BLOCK;
 			}
 
