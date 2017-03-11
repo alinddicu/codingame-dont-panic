@@ -27,7 +27,6 @@
 		// Direction = inputs[2] = direction of the leading clone: LEFT or RIGHT
 
 		[TestMethod]
-		[Ignore]
 		public void Given2By4DriveWith1ElevatorWithUTurnWhenRunThenBlock1StCloneImmediately()
 		{
 			//   E111

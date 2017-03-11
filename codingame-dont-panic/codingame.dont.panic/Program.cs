@@ -2,6 +2,7 @@
 {
 	using System;
 	using System.Collections.Generic;
+	using System.Linq;
 
 	public class Player
 	{
@@ -68,6 +69,15 @@
 		public TurnDecision Decide(TurnParams turnParams)
 		{
 			if (turnParams.IsLeftColision() || turnParams.IsRightColision(_driveParams.DriveWidth))
+			{
+				return TurnDecision.BLOCK;
+			}
+
+			var elevatorOnPreviousFloor = _driveParams.Elevators.FirstOrDefault(e => e.Floor == turnParams.CloneFloor - 1);
+			if (turnParams.ClonePosition > _driveParams.ExitPosition
+				&& turnParams.CloneFloor == _driveParams.ExitFloor
+				&& turnParams.Direction == Direction.RIGHT
+				&& elevatorOnPreviousFloor?.Position + 1 == turnParams.ClonePosition)
 			{
 				return TurnDecision.BLOCK;
 			}
