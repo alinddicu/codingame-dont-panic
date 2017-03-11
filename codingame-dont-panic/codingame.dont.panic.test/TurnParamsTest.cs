@@ -41,11 +41,11 @@
 		}
 
 		[TestMethod]
-		public void GivenTurnParams01RightAndDriveWidthOf3WhenIsLeftCollisionThenTrue()
+		public void GivenTurnParams01RightAndDriveWidthOf3WhenIsLeftCollisionThenFalse()
 		{
 			var turnParams = new TurnParams(() => "0 1 RIGHT");
 
-			Check.That(turnParams.IsRightColision(3)).IsTrue();
+			Check.That(turnParams.IsRightColision(3)).IsFalse();
 		}
 	}
 }
