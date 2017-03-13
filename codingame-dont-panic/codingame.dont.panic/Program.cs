@@ -262,11 +262,11 @@
 
 	public class TurnParams
 	{
-		public int CloneFloor { get; private set; }
+		public int CloneFloor { get; }
 
-		public int ClonePosition { get; private set; }
+		public int ClonePosition { get; }
 
-		public Direction Direction { get; private set; }
+		public Direction Direction { get; }
 
 		public TurnParams(Func<string> readLine)
 		{
@@ -294,15 +294,15 @@
 	{
 		private readonly List<Elevator> _elevators = new List<Elevator>();
 
-		public int FloorCount { get; private set; }
+		public int FloorCount { get; }
 
-		public int DriveWidth { get; private set; }
+		public int DriveWidth { get; }
 
 		public int MaximumRoundCount { get; private set; }
 
-		public int ExitFloor { get; private set; }
+		public int ExitFloor { get; }
 
-		public int ExitPosition { get; private set; }
+		public int ExitPosition { get; }
 
 		public int TotalClonesCount { get; private set; }
 
@@ -337,8 +337,8 @@
 			Position = int.Parse(elevatorInputs[1]);
 		}
 
-		public int Floor { get; private set; }
+		public int Floor { get; }
 
-		public int Position { get; private set; }
+		public int Position { get; }
 	}
 }
