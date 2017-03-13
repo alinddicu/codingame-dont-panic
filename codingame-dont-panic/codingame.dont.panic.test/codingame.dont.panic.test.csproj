@@ -65,13 +65,13 @@
     <Compile Include="TurnParamsTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\codingame.dont.panic\codingame.dont.panic.csproj">
       <Project>{26E2831B-4CF8-4E6C-96B3-B72EDECAEB61}</Project>
       <Name>codingame.dont.panic</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
