@@ -140,7 +140,6 @@
 			var currentFloorElevator = GetCurrentFloorElevator(turnParams);
 			var previousFloorElevator = GetPreviousFloorElevator(turnParams);
 			return IsHeadingInOppositeDirection(turnParams, currentFloorElevator?.Position, Direction.RIGHT)
-				&& turnParams.CloneFloor == currentFloorElevator?.Floor
 				&& previousFloorElevator?.Position + 1 == turnParams.ClonePosition
 				&& blockedClonesPerFloor[turnParams.CloneFloor] == 0;
 		}
@@ -183,7 +182,6 @@
 			var currentFloorElevator = GetCurrentFloorElevator(turnParams);
 			var previousFloorElevator = GetPreviousFloorElevator(turnParams);
 			return IsHeadingInOppositeDirection(turnParams, currentFloorElevator?.Position, Direction.LEFT)
-				&& turnParams.CloneFloor == currentFloorElevator?.Floor
 				&& previousFloorElevator?.Position - 1 == turnParams.ClonePosition
 				&& blockedClonesPerFloor[turnParams.CloneFloor] == 0;
 		}
