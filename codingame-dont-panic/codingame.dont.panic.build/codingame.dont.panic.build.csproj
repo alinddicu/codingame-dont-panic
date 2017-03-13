@@ -4,15 +4,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{26E2831B-4CF8-4E6C-96B3-B72EDECAEB61}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{5F579717-D55F-47D6-82C3-9AC1A1D7CDFF}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>codingame.dont.panic</RootNamespace>
-    <AssemblyName>codingame.dont.panic</AssemblyName>
+    <RootNamespace>codingame.dont.panic.build</RootNamespace>
+    <AssemblyName>codingame.dont.panic.build</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +24,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -40,23 +43,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TurnDecision\BlockCloneBeforeColision.cs" />
-    <Compile Include="TurnDecision\BlockCloneIfGoingLeftAndElevatorIsOnRight.cs" />
-    <Compile Include="TurnDecision\BlockCloneIfGoingLeftAndExitIsOnRight.cs" />
-    <Compile Include="TurnDecision\BlockCloneIfGoingRightAndElevatorIsOnLeft.cs" />
-    <Compile Include="TurnDecision\BlockCloneIfGoingRightAndExitIsOnLeft.cs" />
-    <Compile Include="CloneMaster.cs" />
-    <Compile Include="Direction.cs" />
-    <Compile Include="Drive.cs" />
-    <Compile Include="DriveParams.cs" />
-    <Compile Include="Elevator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TurnDecision\TurnDecision.cs" />
-    <Compile Include="TurnDecision\TurnDecisionBase.cs" />
-    <Compile Include="TurnDecision\TurnDecisionsFactory.cs" />
-    <Compile Include="TurnParams.cs" />
-    <Compile Include="TurnDecision\Wait.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="codingame.dont.panic.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
