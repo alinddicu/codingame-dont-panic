@@ -4,7 +4,7 @@
 	using System.Collections.Generic;
 	using System.Linq;
 
-	public class Player
+	public class Program
 	{
 		public static void Main(string[] args)
 		{
