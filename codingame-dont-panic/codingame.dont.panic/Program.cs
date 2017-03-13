@@ -115,6 +115,16 @@
 		{
 			return blockedClonesPerFloor[turnParams.CloneFloor] == 0;
 		}
+
+		protected static bool IsNearPreviousElevator(int? previousFloorElevatorPosition, TurnParams turnParams, Direction direction)
+		{
+			if (direction == Direction.LEFT)
+			{
+				return previousFloorElevatorPosition - 1 == turnParams.ClonePosition;
+			}
+
+			return previousFloorElevatorPosition + 1 == turnParams.ClonePosition;
+		}
 	}
 
 	public class BlockCloneBeforeColision : TurnDecisionBase
@@ -145,7 +155,7 @@
 			var currentFloorElevator = GetCurrentFloorElevator(turnParams);
 			var previousFloorElevator = GetPreviousFloorElevator(turnParams);
 			return IsHeadingInOppositeDirection(turnParams, currentFloorElevator?.Position, Direction.RIGHT)
-				&& previousFloorElevator?.Position + 1 == turnParams.ClonePosition
+				&& IsNearPreviousElevator(previousFloorElevator?.Position, turnParams, Direction.RIGHT)
 				&& Are0ClonesBlockedOnFloor(turnParams, blockedClonesPerFloor);
 		}
 
@@ -166,7 +176,7 @@
 			var previousFloorElevator = GetPreviousFloorElevator(turnParams);
 			return IsHeadingInOppositeDirection(turnParams, DriveParams.ExitPosition, Direction.RIGHT)
 				&& IsCloneOnExitFloor(turnParams)
-				&& previousFloorElevator?.Position + 1 == turnParams.ClonePosition
+				&& IsNearPreviousElevator(previousFloorElevator?.Position, turnParams, Direction.RIGHT)
 				&& Are0ClonesBlockedOnFloor(turnParams, blockedClonesPerFloor);
 		}
 
@@ -187,7 +197,7 @@
 			var currentFloorElevator = GetCurrentFloorElevator(turnParams);
 			var previousFloorElevator = GetPreviousFloorElevator(turnParams);
 			return IsHeadingInOppositeDirection(turnParams, currentFloorElevator?.Position, Direction.LEFT)
-				&& previousFloorElevator?.Position - 1 == turnParams.ClonePosition
+				&& IsNearPreviousElevator(previousFloorElevator?.Position, turnParams, Direction.LEFT)
 				&& Are0ClonesBlockedOnFloor(turnParams, blockedClonesPerFloor);
 		}
 
@@ -208,7 +218,7 @@
 			var previousFloorElevator = GetPreviousFloorElevator(turnParams);
 			return IsHeadingInOppositeDirection(turnParams, DriveParams.ExitPosition, Direction.LEFT)
 				&& IsCloneOnExitFloor(turnParams)
-				&& previousFloorElevator?.Position - 1 == turnParams.ClonePosition
+				&& IsNearPreviousElevator(previousFloorElevator?.Position, turnParams, Direction.LEFT)
 				&& Are0ClonesBlockedOnFloor(turnParams, blockedClonesPerFloor);
 		}
 
