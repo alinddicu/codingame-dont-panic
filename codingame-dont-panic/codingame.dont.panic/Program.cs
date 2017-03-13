@@ -110,6 +110,11 @@
 
 			return turnParams.ClonePosition < objectivePosition;
 		}
+
+		protected static bool Are0ClonesBlockedOnFloor(TurnParams turnParams, int[] blockedClonesPerFloor)
+		{
+			return blockedClonesPerFloor[turnParams.CloneFloor] == 0;
+		}
 	}
 
 	public class BlockCloneBeforeColision : TurnDecisionBase
@@ -141,7 +146,7 @@
 			var previousFloorElevator = GetPreviousFloorElevator(turnParams);
 			return IsHeadingInOppositeDirection(turnParams, currentFloorElevator?.Position, Direction.RIGHT)
 				&& previousFloorElevator?.Position + 1 == turnParams.ClonePosition
-				&& blockedClonesPerFloor[turnParams.CloneFloor] == 0;
+				&& Are0ClonesBlockedOnFloor(turnParams, blockedClonesPerFloor);
 		}
 
 		public override TurnDecision Decide(TurnParams turnParams, int[] blockedClonesPerFloor)
@@ -162,7 +167,7 @@
 			return IsHeadingInOppositeDirection(turnParams, DriveParams.ExitPosition, Direction.RIGHT)
 				&& IsCloneOnExitFloor(turnParams)
 				&& previousFloorElevator?.Position + 1 == turnParams.ClonePosition
-				&& blockedClonesPerFloor[turnParams.CloneFloor] == 0;
+				&& Are0ClonesBlockedOnFloor(turnParams, blockedClonesPerFloor);
 		}
 
 		public override TurnDecision Decide(TurnParams turnParams, int[] blockedClonesPerFloor)
@@ -183,7 +188,7 @@
 			var previousFloorElevator = GetPreviousFloorElevator(turnParams);
 			return IsHeadingInOppositeDirection(turnParams, currentFloorElevator?.Position, Direction.LEFT)
 				&& previousFloorElevator?.Position - 1 == turnParams.ClonePosition
-				&& blockedClonesPerFloor[turnParams.CloneFloor] == 0;
+				&& Are0ClonesBlockedOnFloor(turnParams, blockedClonesPerFloor);
 		}
 
 		public override TurnDecision Decide(TurnParams turnParams, int[] blockedClonesPerFloor)
@@ -204,7 +209,7 @@
 			return IsHeadingInOppositeDirection(turnParams, DriveParams.ExitPosition, Direction.LEFT)
 				&& IsCloneOnExitFloor(turnParams)
 				&& previousFloorElevator?.Position - 1 == turnParams.ClonePosition
-				&& blockedClonesPerFloor[turnParams.CloneFloor] == 0;
+				&& Are0ClonesBlockedOnFloor(turnParams, blockedClonesPerFloor);
 		}
 
 		public override TurnDecision Decide(TurnParams turnParams, int[] blockedClonesPerFloor)
