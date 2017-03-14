@@ -6,7 +6,7 @@
 		{
 		}
 
-		public override bool CanDecide(TurnParams turnParams, int[] blockedClonesPerFloor)
+		public override bool CanDecide(TurnParams turnParams, bool[] blockedClonesPerFloor)
 		{
 			var currentFloorElevator = GetCurrentFloorElevator(turnParams);
 			var previousFloorElevator = GetPreviousFloorElevator(turnParams);
@@ -15,7 +15,7 @@
 			       && Are0ClonesBlockedOnFloor(turnParams, blockedClonesPerFloor);
 		}
 
-		public override TurnDecision Decide(TurnParams turnParams, int[] blockedClonesPerFloor)
+		public override TurnDecision Decide(TurnParams turnParams, bool[] blockedClonesPerFloor)
 		{
 			return IncrementBlockedClonesPerFloorAndBlock(turnParams, blockedClonesPerFloor);
 		}

@@ -11,9 +11,9 @@
 
 		protected DriveParams DriveParams { get; }
 
-		public abstract bool CanDecide(TurnParams turnParams, int[] blockedClonesPerFloor);
+		public abstract bool CanDecide(TurnParams turnParams, bool[] blockedClonesPerFloor);
 
-		public abstract TurnDecision Decide(TurnParams turnParams, int[] blockedClonesPerFloor);
+		public abstract TurnDecision Decide(TurnParams turnParams, bool[] blockedClonesPerFloor);
 
 		protected Elevator GetCurrentFloorElevator(TurnParams turnParams)
 		{
@@ -30,9 +30,9 @@
 			return DriveParams.Elevators.FirstOrDefault(e => e.Floor == turnParams.CloneFloor - offSet);
 		}
 
-		protected static TurnDecision IncrementBlockedClonesPerFloorAndBlock(TurnParams turnParams, int[] blockedClonesPerFloor)
+		protected static TurnDecision IncrementBlockedClonesPerFloorAndBlock(TurnParams turnParams, bool[] blockedClonesPerFloor)
 		{
-			blockedClonesPerFloor[turnParams.CloneFloor]++;
+			blockedClonesPerFloor[turnParams.CloneFloor] = true;
 			return TurnDecision.BLOCK;
 		}
 
@@ -51,9 +51,9 @@
 			return turnParams.ClonePosition < objectivePosition;
 		}
 
-		protected static bool Are0ClonesBlockedOnFloor(TurnParams turnParams, int[] blockedClonesPerFloor)
+		protected static bool Are0ClonesBlockedOnFloor(TurnParams turnParams, bool[] blockedClonesPerFloor)
 		{
-			return blockedClonesPerFloor[turnParams.CloneFloor] == 0;
+			return !blockedClonesPerFloor[turnParams.CloneFloor];
 		}
 
 		protected static bool IsNearPreviousElevator(int? previousFloorElevatorPosition, TurnParams turnParams, Direction direction)

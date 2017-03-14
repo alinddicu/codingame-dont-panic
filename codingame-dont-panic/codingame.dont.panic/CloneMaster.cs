@@ -6,12 +6,12 @@
 
 	public class CloneMaster
 	{
-		private readonly int[] _blockedClonesPerFloor;
+		private readonly bool[] _blockedClonesPerFloor;
 		private readonly IEnumerable<TurnDecisionBase> _turnDecisions;
 
 		public CloneMaster(DriveParams driveParams, TurnDecisionsFactory turnDecisionsFactory)
 		{
-			_blockedClonesPerFloor = new int[driveParams.FloorCount];
+			_blockedClonesPerFloor = new bool[driveParams.FloorCount];
 			_turnDecisions = turnDecisionsFactory.Create();
 		}
 
