@@ -21,7 +21,7 @@
 			CloneFloor = int.Parse(inputs[0]);
 			// position of the leading clone on its floor
 			ClonePosition = int.Parse(inputs[1]);
-			// direction of the leading clone: LEFT or RIGHT
+			// referenceDirection of the leading clone: LEFT or RIGHT
 			CloneDirection = (Direction)Enum.Parse(typeof(Direction), inputs[2]);
 		}
 
@@ -61,6 +61,22 @@
 			}
 
 			return ClonePosition < objectivePosition;
+		}
+
+		private Elevator GetPreviousFloorElevator()
+		{
+			return _driveParams.Elevators.FirstOrDefault(e => e.Floor == CloneFloor - 1);
+		}
+
+		public bool IsCloneNearPreviousElevator(Direction referenceDirection)
+		{
+			var previousFloorElevatorPosition = GetPreviousFloorElevator()?.Position;
+			if (referenceDirection == Direction.LEFT)
+			{
+				return previousFloorElevatorPosition - 1 == ClonePosition;
+			}
+
+			return previousFloorElevatorPosition + 1 == ClonePosition;
 		}
 	}
 }

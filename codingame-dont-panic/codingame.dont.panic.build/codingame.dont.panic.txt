@@ -211,6 +211,22 @@ namespace codingame.dont.panic
 
 			return ClonePosition < objectivePosition;
 		}
+
+		private Elevator GetPreviousFloorElevator()
+		{
+			return _driveParams.Elevators.FirstOrDefault(e => e.Floor == CloneFloor - 1);
+		}
+
+		public bool IsCloneNearPreviousElevator(Direction referenceDirection)
+		{
+			var previousFloorElevatorPosition = GetPreviousFloorElevator()?.Position;
+			if (referenceDirection == Direction.LEFT)
+			{
+				return previousFloorElevatorPosition - 1 == ClonePosition;
+			}
+
+			return previousFloorElevatorPosition + 1 == ClonePosition;
+		}
 	}
 }
 
@@ -250,9 +266,8 @@ namespace codingame.dont.panic.TurnDecision
 
 		public override bool CanDecide(TurnParams turnParams, bool[] blockedClonesPerFloor)
 		{
-			var previousFloorElevator = GetPreviousFloorElevator(turnParams);
 			return turnParams.ShouldCloneReverse(Direction.LEFT)
-			       && IsNearPreviousElevator(previousFloorElevator?.Position, turnParams, Direction.LEFT)
+			       && turnParams.IsCloneNearPreviousElevator(Direction.LEFT)
 			       && Are0ClonesBlockedOnFloor(turnParams, blockedClonesPerFloor);
 		}
 
@@ -273,10 +288,9 @@ namespace codingame.dont.panic.TurnDecision
 
 		public override bool CanDecide(TurnParams turnParams, bool[] blockedClonesPerFloor)
 		{
-			var previousFloorElevator = GetPreviousFloorElevator(turnParams);
 			return turnParams.ShouldCloneReverse(Direction.LEFT)
 			       && turnParams.IsCloneOnExitFloor()
-			       && IsNearPreviousElevator(previousFloorElevator?.Position, turnParams, Direction.LEFT)
+				   && turnParams.IsCloneNearPreviousElevator(Direction.LEFT)
 			       && Are0ClonesBlockedOnFloor(turnParams, blockedClonesPerFloor);
 		}
 
@@ -297,9 +311,8 @@ namespace codingame.dont.panic.TurnDecision
 
 		public override bool CanDecide(TurnParams turnParams, bool[] blockedClonesPerFloor)
 		{
-			var previousFloorElevator = GetPreviousFloorElevator(turnParams);
 			return turnParams.ShouldCloneReverse(Direction.RIGHT)
-			       && IsNearPreviousElevator(previousFloorElevator?.Position, turnParams, Direction.RIGHT)
+			       && turnParams.IsCloneNearPreviousElevator(Direction.RIGHT)
 			       && Are0ClonesBlockedOnFloor(turnParams, blockedClonesPerFloor);
 		}
 
@@ -320,10 +333,9 @@ namespace codingame.dont.panic.TurnDecision
 
 		public override bool CanDecide(TurnParams turnParams, bool[] blockedClonesPerFloor)
 		{
-			var previousFloorElevator = GetPreviousFloorElevator(turnParams);
 			return turnParams.ShouldCloneReverse(Direction.RIGHT)
 			       && turnParams.IsCloneOnExitFloor()
-			       && IsNearPreviousElevator(previousFloorElevator?.Position, turnParams, Direction.RIGHT)
+				   && turnParams.IsCloneNearPreviousElevator(Direction.RIGHT)
 			       && Are0ClonesBlockedOnFloor(turnParams, blockedClonesPerFloor);
 		}
 
@@ -349,31 +361,16 @@ namespace codingame.dont.panic.TurnDecision
 
 	public abstract class TurnDecisionBase
 	{
+		private readonly DriveParams _driveParams;
+
 		protected TurnDecisionBase(DriveParams driveParams)
 		{
-			DriveParams = driveParams;
+			_driveParams = driveParams;
 		}
-
-		protected DriveParams DriveParams { get; }
 
 		public abstract bool CanDecide(TurnParams turnParams, bool[] blockedClonesPerFloor);
 
 		public abstract TurnDecision Decide(TurnParams turnParams, bool[] blockedClonesPerFloor);
-
-		protected Elevator GetCurrentFloorElevator(TurnParams turnParams)
-		{
-			return GetFloorElevator(turnParams, 0);
-		}
-
-		protected Elevator GetPreviousFloorElevator(TurnParams turnParams)
-		{
-			return GetFloorElevator(turnParams, 1);
-		}
-
-		private Elevator GetFloorElevator(TurnParams turnParams, int offSet)
-		{
-			return DriveParams.Elevators.FirstOrDefault(e => e.Floor == turnParams.CloneFloor - offSet);
-		}
 
 		protected static TurnDecision IncrementBlockedClonesPerFloorAndBlock(TurnParams turnParams, bool[] blockedClonesPerFloor)
 		{
@@ -384,16 +381,6 @@ namespace codingame.dont.panic.TurnDecision
 		protected static bool Are0ClonesBlockedOnFloor(TurnParams turnParams, bool[] blockedClonesPerFloor)
 		{
 			return !blockedClonesPerFloor[turnParams.CloneFloor];
-		}
-
-		protected static bool IsNearPreviousElevator(int? previousFloorElevatorPosition, TurnParams turnParams, Direction direction)
-		{
-			if (direction == Direction.LEFT)
-			{
-				return previousFloorElevatorPosition - 1 == turnParams.ClonePosition;
-			}
-
-			return previousFloorElevatorPosition + 1 == turnParams.ClonePosition;
 		}
 	}
 }

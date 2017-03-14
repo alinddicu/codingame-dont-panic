@@ -8,9 +8,8 @@
 
 		public override bool CanDecide(TurnParams turnParams, bool[] blockedClonesPerFloor)
 		{
-			var previousFloorElevator = GetPreviousFloorElevator(turnParams);
 			return turnParams.ShouldCloneReverse(Direction.RIGHT)
-			       && IsNearPreviousElevator(previousFloorElevator?.Position, turnParams, Direction.RIGHT)
+			       && turnParams.IsCloneNearPreviousElevator(Direction.RIGHT)
 			       && Are0ClonesBlockedOnFloor(turnParams, blockedClonesPerFloor);
 		}
 
