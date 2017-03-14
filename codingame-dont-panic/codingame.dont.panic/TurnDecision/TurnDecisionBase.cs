@@ -4,30 +4,20 @@
 
 	public abstract class TurnDecisionBase
 	{
+		private readonly DriveParams _driveParams;
+
 		protected TurnDecisionBase(DriveParams driveParams)
 		{
-			DriveParams = driveParams;
+			_driveParams = driveParams;
 		}
-
-		protected DriveParams DriveParams { get; }
 
 		public abstract bool CanDecide(TurnParams turnParams, bool[] blockedClonesPerFloor);
 
 		public abstract TurnDecision Decide(TurnParams turnParams, bool[] blockedClonesPerFloor);
 
-		protected Elevator GetCurrentFloorElevator(TurnParams turnParams)
-		{
-			return GetFloorElevator(turnParams, 0);
-		}
-
 		protected Elevator GetPreviousFloorElevator(TurnParams turnParams)
 		{
-			return GetFloorElevator(turnParams, 1);
-		}
-
-		private Elevator GetFloorElevator(TurnParams turnParams, int offSet)
-		{
-			return DriveParams.Elevators.FirstOrDefault(e => e.Floor == turnParams.CloneFloor - offSet);
+			return _driveParams.Elevators.FirstOrDefault(e => e.Floor == turnParams.CloneFloor - 1);
 		}
 
 		protected static TurnDecision IncrementBlockedClonesPerFloorAndBlock(TurnParams turnParams, bool[] blockedClonesPerFloor)
