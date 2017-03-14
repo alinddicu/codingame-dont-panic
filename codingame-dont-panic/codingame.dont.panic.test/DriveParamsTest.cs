@@ -19,6 +19,11 @@
 
 			var driveParams = new DriveParams(simulator.ReadLine);
 
+			TestDriveParams(driveParams);
+		}
+
+		public static void TestDriveParams(DriveParams driveParams)
+		{
 			Check.That(driveParams.FloorCount).IsEqualTo(8);
 			Check.That(driveParams.DriveWidth).IsEqualTo(7);
 			Check.That(driveParams.MaximumRoundCount).IsEqualTo(6);

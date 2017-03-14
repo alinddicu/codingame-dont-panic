@@ -1,6 +1,7 @@
 ﻿namespace codingame.dont.panic.test
 {
 	using System;
+	using System.Linq;
 	using Microsoft.VisualStudio.TestTools.UnitTesting;
 	using NFluent;
 
@@ -33,6 +34,24 @@
 			simulator.WriteLine("456");
 
 			Check.That(simulator.WrittenLines).ContainsExactly("123", "456");
+		}
+
+		[TestMethod]
+		public void GivenConsoleSimulatorWithParametersWhenCreateThenValuesOfDriveParamsAreCorrect()
+		{
+			var simulator = new ConsoleSimulator(
+				8,
+				7,
+				5,
+				4,
+				2,
+				new Elevator("2 1"),
+				new Elevator("1 3")
+			);
+
+			var driveParams = new DriveParams(simulator.ReadLine);
+			
+			DriveParamsTest.TestDriveParams(driveParams);
 		}
 	}
 }

@@ -12,5 +12,10 @@
 		public int Floor { get; }
 
 		public int Position { get; }
+
+		public override string ToString()
+		{
+			return string.Format("{0} {1}", Floor, Position);
+		}
 	}
 }

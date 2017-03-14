@@ -1,6 +1,7 @@
 namespace codingame.dont.panic.test
 {
 	using System;
+	using System.Linq;
 	using System.Collections.Generic;
 
 	public class ConsoleSimulator
@@ -12,6 +13,45 @@ namespace codingame.dont.panic.test
 		public static ConsoleSimulator Create()
 		{
 			return new ConsoleSimulator("8 7 6 5 4 3 2 0");
+		}
+
+		public ConsoleSimulator(
+			int floorCount,
+			int driveWidth,
+			int exitFloor,
+			int exitPosition,
+			int elevatorsCount,
+			params Elevator[] elevators)
+			: this(ToLinesToRead(
+				floorCount,
+				driveWidth,
+				exitFloor,
+				exitPosition,
+				elevatorsCount,
+				elevators).ToArray())
+		{
+		}
+
+		private static IEnumerable<string> ToLinesToRead(
+			int floorCount,
+			int driveWidth,
+			int exitFloor,
+			int exitPosition,
+			int elevatorsCount,
+			params Elevator[] elevators)
+		{
+			var generalParams = string.Format("{0} {1} {2} {3} {4} {5} {6} {7}",
+				floorCount,
+				driveWidth,
+				6,
+				exitFloor,
+				exitPosition,
+				3,
+				2,
+				elevatorsCount);
+			var linesToRead = new List<string> { generalParams };
+			linesToRead.AddRange(elevators != null ? elevators.Select(e => e.ToString()) : Enumerable.Empty<string>());
+			return linesToRead;
 		}
 
 		public ConsoleSimulator(params string[] linesToRead)

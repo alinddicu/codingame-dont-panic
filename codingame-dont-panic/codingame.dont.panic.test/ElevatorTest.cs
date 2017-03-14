@@ -14,5 +14,13 @@
 			Check.That(elevator.Floor).IsEqualTo(0);
 			Check.That(elevator.Position).IsEqualTo(3);
 		}
+
+		[TestMethod]
+		public void GivenElevatorWhenToStringThenToStringIsCorrect()
+		{
+			var elevator = new Elevator("0 3");
+
+			Check.That(elevator.ToString()).IsEqualTo("0 3");
+		}
 	}
 }
