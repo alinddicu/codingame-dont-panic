@@ -24,7 +24,7 @@
 		// TurnParams
 		// CloneFloor = inputs[0] = floor of the leading clone
 		// ClonePosition = inputs[1] = position of the leading clone on its floor
-		// Direction = inputs[2] = direction of the leading clone: LEFT or RIGHT
+		// CloneDirection = inputs[2] = direction of the leading clone: LEFT or RIGHT
 
 		[TestMethod]
 		public void Given2By4DriveWith1ElevatorWithRightUTurnWhenRunThenBlock1StCloneImmediately()

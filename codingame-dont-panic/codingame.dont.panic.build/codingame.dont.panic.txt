@@ -6,12 +6,12 @@ namespace codingame.dont.panic
 
 	public class CloneMaster
 	{
-		private readonly int[] _blockedClonesPerFloor;
+		private readonly bool[] _blockedClonesPerFloor;
 		private readonly IEnumerable<TurnDecisionBase> _turnDecisions;
 
 		public CloneMaster(DriveParams driveParams, TurnDecisionsFactory turnDecisionsFactory)
 		{
-			_blockedClonesPerFloor = new int[driveParams.FloorCount];
+			_blockedClonesPerFloor = new bool[driveParams.FloorCount];
 			_turnDecisions = turnDecisionsFactory.Create();
 		}
 
@@ -58,8 +58,8 @@ namespace codingame.dont.panic
 			// game loop
 			while (true)
 			{
-				var turnParams = new TurnParams(_readLine());
-				if (turnParams.Direction == Direction.EXIT)
+				var turnParams = new TurnParams(_readLine(), driveParams);
+				if (turnParams.CloneDirection == Direction.EXIT)
 				{
 					break;
 				}
@@ -153,31 +153,54 @@ namespace codingame.dont.panic
 
 	public class TurnParams
 	{
+		private readonly DriveParams _driveParams;
+
 		public int CloneFloor { get; }
 
 		public int ClonePosition { get; }
 
-		public Direction Direction { get; }
+		public Direction CloneDirection { get; }
 
-		public TurnParams(string readLineParams)
+		public TurnParams(string readLineParams, DriveParams driveParams)
 		{
+			_driveParams = driveParams;
 			var inputs = readLineParams.Split(' ');
 			// floor of the leading clone
 			CloneFloor = int.Parse(inputs[0]);
 			// position of the leading clone on its floor
 			ClonePosition = int.Parse(inputs[1]);
 			// direction of the leading clone: LEFT or RIGHT
-			Direction = (Direction)Enum.Parse(typeof(Direction), inputs[2]);
+			CloneDirection = (Direction)Enum.Parse(typeof(Direction), inputs[2]);
 		}
 
 		public bool IsLeftColision()
 		{
-			return ClonePosition == 0 && Direction == Direction.LEFT;
+			return ClonePosition == 0 && CloneDirection == Direction.LEFT;
 		}
 
 		public bool IsRightColision(int driveWidth)
 		{
-			return ClonePosition + 1 == driveWidth && Direction == Direction.RIGHT;
+			return ClonePosition + 1 == driveWidth && CloneDirection == Direction.RIGHT;
+		}
+
+		public bool IsCloneOnExitFloor()
+		{
+			return CloneFloor == _driveParams.ExitFloor;
+		}
+
+		public bool IsHeadingInOppositeDirection(int? objectivePosition, Direction direction)
+		{
+			if (CloneDirection != direction)
+			{
+				return false;
+			}
+
+			if (direction == Direction.RIGHT)
+			{
+				return ClonePosition > objectivePosition;
+			}
+
+			return ClonePosition < objectivePosition;
 		}
 	}
 }
@@ -196,12 +219,12 @@ namespace codingame.dont.panic.TurnDecision
 		{
 		}
 
-		public override bool CanDecide(TurnParams turnParams, int[] blockedClonesPerFloor)
+		public override bool CanDecide(TurnParams turnParams, bool[] blockedClonesPerFloor)
 		{
 			return turnParams.IsLeftColision() || turnParams.IsRightColision(DriveParams.DriveWidth);
 		}
 
-		public override TurnDecision Decide(TurnParams turnParams, int[] blockedClonesPerFloor)
+		public override TurnDecision Decide(TurnParams turnParams, bool[] blockedClonesPerFloor)
 		{
 			return IncrementBlockedClonesPerFloorAndBlock(turnParams, blockedClonesPerFloor);
 		}
@@ -216,16 +239,16 @@ namespace codingame.dont.panic.TurnDecision
 		{
 		}
 
-		public override bool CanDecide(TurnParams turnParams, int[] blockedClonesPerFloor)
+		public override bool CanDecide(TurnParams turnParams, bool[] blockedClonesPerFloor)
 		{
 			var currentFloorElevator = GetCurrentFloorElevator(turnParams);
 			var previousFloorElevator = GetPreviousFloorElevator(turnParams);
-			return IsHeadingInOppositeDirection(turnParams, currentFloorElevator?.Position, Direction.LEFT)
+			return turnParams.IsHeadingInOppositeDirection(currentFloorElevator?.Position, Direction.LEFT)
 			       && IsNearPreviousElevator(previousFloorElevator?.Position, turnParams, Direction.LEFT)
 			       && Are0ClonesBlockedOnFloor(turnParams, blockedClonesPerFloor);
 		}
 
-		public override TurnDecision Decide(TurnParams turnParams, int[] blockedClonesPerFloor)
+		public override TurnDecision Decide(TurnParams turnParams, bool[] blockedClonesPerFloor)
 		{
 			return IncrementBlockedClonesPerFloorAndBlock(turnParams, blockedClonesPerFloor);
 		}
@@ -240,16 +263,16 @@ namespace codingame.dont.panic.TurnDecision
 		{
 		}
 
-		public override bool CanDecide(TurnParams turnParams, int[] blockedClonesPerFloor)
+		public override bool CanDecide(TurnParams turnParams, bool[] blockedClonesPerFloor)
 		{
 			var previousFloorElevator = GetPreviousFloorElevator(turnParams);
-			return IsHeadingInOppositeDirection(turnParams, DriveParams.ExitPosition, Direction.LEFT)
-			       && IsCloneOnExitFloor(turnParams)
+			return turnParams.IsHeadingInOppositeDirection(DriveParams.ExitPosition, Direction.LEFT)
+			       && turnParams.IsCloneOnExitFloor()
 			       && IsNearPreviousElevator(previousFloorElevator?.Position, turnParams, Direction.LEFT)
 			       && Are0ClonesBlockedOnFloor(turnParams, blockedClonesPerFloor);
 		}
 
-		public override TurnDecision Decide(TurnParams turnParams, int[] blockedClonesPerFloor)
+		public override TurnDecision Decide(TurnParams turnParams, bool[] blockedClonesPerFloor)
 		{
 			return IncrementBlockedClonesPerFloorAndBlock(turnParams, blockedClonesPerFloor);
 		}
@@ -264,16 +287,16 @@ namespace codingame.dont.panic.TurnDecision
 		{
 		}
 
-		public override bool CanDecide(TurnParams turnParams, int[] blockedClonesPerFloor)
+		public override bool CanDecide(TurnParams turnParams, bool[] blockedClonesPerFloor)
 		{
 			var currentFloorElevator = GetCurrentFloorElevator(turnParams);
 			var previousFloorElevator = GetPreviousFloorElevator(turnParams);
-			return IsHeadingInOppositeDirection(turnParams, currentFloorElevator?.Position, Direction.RIGHT)
+			return turnParams.IsHeadingInOppositeDirection(currentFloorElevator?.Position, Direction.RIGHT)
 			       && IsNearPreviousElevator(previousFloorElevator?.Position, turnParams, Direction.RIGHT)
 			       && Are0ClonesBlockedOnFloor(turnParams, blockedClonesPerFloor);
 		}
 
-		public override TurnDecision Decide(TurnParams turnParams, int[] blockedClonesPerFloor)
+		public override TurnDecision Decide(TurnParams turnParams, bool[] blockedClonesPerFloor)
 		{
 			return IncrementBlockedClonesPerFloorAndBlock(turnParams, blockedClonesPerFloor);
 		}
@@ -288,16 +311,16 @@ namespace codingame.dont.panic.TurnDecision
 		{
 		}
 
-		public override bool CanDecide(TurnParams turnParams, int[] blockedClonesPerFloor)
+		public override bool CanDecide(TurnParams turnParams, bool[] blockedClonesPerFloor)
 		{
 			var previousFloorElevator = GetPreviousFloorElevator(turnParams);
-			return IsHeadingInOppositeDirection(turnParams, DriveParams.ExitPosition, Direction.RIGHT)
-			       && IsCloneOnExitFloor(turnParams)
+			return turnParams.IsHeadingInOppositeDirection(DriveParams.ExitPosition, Direction.RIGHT)
+			       && turnParams.IsCloneOnExitFloor()
 			       && IsNearPreviousElevator(previousFloorElevator?.Position, turnParams, Direction.RIGHT)
 			       && Are0ClonesBlockedOnFloor(turnParams, blockedClonesPerFloor);
 		}
 
-		public override TurnDecision Decide(TurnParams turnParams, int[] blockedClonesPerFloor)
+		public override TurnDecision Decide(TurnParams turnParams, bool[] blockedClonesPerFloor)
 		{
 			return IncrementBlockedClonesPerFloorAndBlock(turnParams, blockedClonesPerFloor);
 		}
@@ -326,9 +349,9 @@ namespace codingame.dont.panic.TurnDecision
 
 		protected DriveParams DriveParams { get; }
 
-		public abstract bool CanDecide(TurnParams turnParams, int[] blockedClonesPerFloor);
+		public abstract bool CanDecide(TurnParams turnParams, bool[] blockedClonesPerFloor);
 
-		public abstract TurnDecision Decide(TurnParams turnParams, int[] blockedClonesPerFloor);
+		public abstract TurnDecision Decide(TurnParams turnParams, bool[] blockedClonesPerFloor);
 
 		protected Elevator GetCurrentFloorElevator(TurnParams turnParams)
 		{
@@ -345,35 +368,15 @@ namespace codingame.dont.panic.TurnDecision
 			return DriveParams.Elevators.FirstOrDefault(e => e.Floor == turnParams.CloneFloor - offSet);
 		}
 
-		protected static TurnDecision IncrementBlockedClonesPerFloorAndBlock(TurnParams turnParams, int[] blockedClonesPerFloor)
+		protected static TurnDecision IncrementBlockedClonesPerFloorAndBlock(TurnParams turnParams, bool[] blockedClonesPerFloor)
 		{
-			blockedClonesPerFloor[turnParams.CloneFloor]++;
+			blockedClonesPerFloor[turnParams.CloneFloor] = true;
 			return TurnDecision.BLOCK;
 		}
 
-		protected bool IsCloneOnExitFloor(TurnParams turnParams)
+		protected static bool Are0ClonesBlockedOnFloor(TurnParams turnParams, bool[] blockedClonesPerFloor)
 		{
-			return turnParams.CloneFloor == DriveParams.ExitFloor;
-		}
-
-		protected static bool IsHeadingInOppositeDirection(TurnParams turnParams, int? objectivePosition, Direction direction)
-		{
-			if (turnParams.Direction != direction)
-			{
-				return false;
-			}
-
-			if (direction == Direction.RIGHT)
-			{
-				return turnParams.ClonePosition > objectivePosition;
-			}
-
-			return turnParams.ClonePosition < objectivePosition;
-		}
-
-		protected static bool Are0ClonesBlockedOnFloor(TurnParams turnParams, int[] blockedClonesPerFloor)
-		{
-			return blockedClonesPerFloor[turnParams.CloneFloor] == 0;
+			return !blockedClonesPerFloor[turnParams.CloneFloor];
 		}
 
 		protected static bool IsNearPreviousElevator(int? previousFloorElevatorPosition, TurnParams turnParams, Direction direction)
@@ -421,12 +424,12 @@ namespace codingame.dont.panic.TurnDecision
 		{
 		}
 
-		public override bool CanDecide(TurnParams turnParams, int[] blockedClonesPerFloor)
+		public override bool CanDecide(TurnParams turnParams, bool[] blockedClonesPerFloor)
 		{
 			return true;
 		}
 
-		public override TurnDecision Decide(TurnParams turnParams, int[] blockedClonesPerFloor)
+		public override TurnDecision Decide(TurnParams turnParams, bool[] blockedClonesPerFloor)
 		{
 			return TurnDecision.WAIT;
 		}

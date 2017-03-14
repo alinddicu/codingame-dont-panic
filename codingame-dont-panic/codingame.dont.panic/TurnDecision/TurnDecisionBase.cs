@@ -36,21 +36,6 @@
 			return TurnDecision.BLOCK;
 		}
 
-		protected static bool IsHeadingInOppositeDirection(TurnParams turnParams, int? objectivePosition, Direction direction)
-		{
-			if (turnParams.Direction != direction)
-			{
-				return false;
-			}
-
-			if (direction == Direction.RIGHT)
-			{
-				return turnParams.ClonePosition > objectivePosition;
-			}
-
-			return turnParams.ClonePosition < objectivePosition;
-		}
-
 		protected static bool Are0ClonesBlockedOnFloor(TurnParams turnParams, bool[] blockedClonesPerFloor)
 		{
 			return !blockedClonesPerFloor[turnParams.CloneFloor];

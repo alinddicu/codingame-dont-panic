@@ -23,7 +23,7 @@
 			while (true)
 			{
 				var turnParams = new TurnParams(_readLine(), driveParams);
-				if (turnParams.Direction == Direction.EXIT)
+				if (turnParams.CloneDirection == Direction.EXIT)
 				{
 					break;
 				}

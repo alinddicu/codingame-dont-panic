@@ -13,7 +13,7 @@
 
 			Check.That(turnParams.CloneFloor).IsEqualTo(8);
 			Check.That(turnParams.ClonePosition).IsEqualTo(7);
-			Check.That(turnParams.Direction).IsEqualTo(Direction.RIGHT);
+			Check.That(turnParams.CloneDirection).IsEqualTo(Direction.RIGHT);
 		}
 
 		[TestMethod]
