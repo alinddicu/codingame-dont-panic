@@ -1,6 +1,7 @@
 ﻿namespace codingame.dont.panic
 {
 	using System;
+	using System.Linq;
 
 	public class TurnParams
 	{
@@ -39,13 +40,21 @@
 			return CloneFloor == _driveParams.ExitFloor;
 		}
 
-		public bool IsHeadingInOppositeDirection(int? objectivePosition, Direction direction)
+		private int? GetObjectivePosition()
+		{
+			return _driveParams.ExitFloor == CloneFloor
+				? _driveParams.ExitPosition
+				: _driveParams.Elevators.FirstOrDefault(e => e.Floor == CloneFloor && e.Position == ClonePosition)?.Position;
+		}
+
+		public bool IsHeadingInOppositeDirection(Direction direction)
 		{
 			if (CloneDirection != direction)
 			{
 				return false;
 			}
 
+			var objectivePosition = GetObjectivePosition();
 			if (direction == Direction.RIGHT)
 			{
 				return ClonePosition > objectivePosition;

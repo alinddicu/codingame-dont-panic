@@ -8,9 +8,8 @@
 
 		public override bool CanDecide(TurnParams turnParams, bool[] blockedClonesPerFloor)
 		{
-			var currentFloorElevator = GetCurrentFloorElevator(turnParams);
 			var previousFloorElevator = GetPreviousFloorElevator(turnParams);
-			return turnParams.IsHeadingInOppositeDirection(currentFloorElevator?.Position, Direction.LEFT)
+			return turnParams.IsHeadingInOppositeDirection(Direction.LEFT)
 			       && IsNearPreviousElevator(previousFloorElevator?.Position, turnParams, Direction.LEFT)
 			       && Are0ClonesBlockedOnFloor(turnParams, blockedClonesPerFloor);
 		}
