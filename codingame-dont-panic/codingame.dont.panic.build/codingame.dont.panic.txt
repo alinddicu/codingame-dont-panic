@@ -150,6 +150,7 @@ namespace codingame.dont.panic
 namespace codingame.dont.panic
 {
 	using System;
+	using System.Linq;
 
 	public class TurnParams
 	{
@@ -178,9 +179,9 @@ namespace codingame.dont.panic
 			return ClonePosition == 0 && CloneDirection == Direction.LEFT;
 		}
 
-		public bool IsRightColision(int driveWidth)
+		public bool IsRightColision()
 		{
-			return ClonePosition + 1 == driveWidth && CloneDirection == Direction.RIGHT;
+			return ClonePosition + 1 == _driveParams.DriveWidth && CloneDirection == Direction.RIGHT;
 		}
 
 		public bool IsCloneOnExitFloor()
@@ -188,13 +189,21 @@ namespace codingame.dont.panic
 			return CloneFloor == _driveParams.ExitFloor;
 		}
 
-		public bool IsHeadingInOppositeDirection(int? objectivePosition, Direction direction)
+		private int? GetObjectivePosition()
+		{
+			return _driveParams.ExitFloor == CloneFloor
+				? _driveParams.ExitPosition
+				: _driveParams.Elevators.FirstOrDefault(e => e.Floor == CloneFloor)?.Position;
+		}
+
+		public bool IsHeadingInOppositeDirection(Direction direction)
 		{
 			if (CloneDirection != direction)
 			{
 				return false;
 			}
 
+			var objectivePosition = GetObjectivePosition();
 			if (direction == Direction.RIGHT)
 			{
 				return ClonePosition > objectivePosition;
@@ -221,7 +230,7 @@ namespace codingame.dont.panic.TurnDecision
 
 		public override bool CanDecide(TurnParams turnParams, bool[] blockedClonesPerFloor)
 		{
-			return turnParams.IsLeftColision() || turnParams.IsRightColision(DriveParams.DriveWidth);
+			return turnParams.IsLeftColision() || turnParams.IsRightColision();
 		}
 
 		public override TurnDecision Decide(TurnParams turnParams, bool[] blockedClonesPerFloor)
@@ -241,9 +250,8 @@ namespace codingame.dont.panic.TurnDecision
 
 		public override bool CanDecide(TurnParams turnParams, bool[] blockedClonesPerFloor)
 		{
-			var currentFloorElevator = GetCurrentFloorElevator(turnParams);
 			var previousFloorElevator = GetPreviousFloorElevator(turnParams);
-			return turnParams.IsHeadingInOppositeDirection(currentFloorElevator?.Position, Direction.LEFT)
+			return turnParams.IsHeadingInOppositeDirection(Direction.LEFT)
 			       && IsNearPreviousElevator(previousFloorElevator?.Position, turnParams, Direction.LEFT)
 			       && Are0ClonesBlockedOnFloor(turnParams, blockedClonesPerFloor);
 		}
@@ -266,7 +274,7 @@ namespace codingame.dont.panic.TurnDecision
 		public override bool CanDecide(TurnParams turnParams, bool[] blockedClonesPerFloor)
 		{
 			var previousFloorElevator = GetPreviousFloorElevator(turnParams);
-			return turnParams.IsHeadingInOppositeDirection(DriveParams.ExitPosition, Direction.LEFT)
+			return turnParams.IsHeadingInOppositeDirection(Direction.LEFT)
 			       && turnParams.IsCloneOnExitFloor()
 			       && IsNearPreviousElevator(previousFloorElevator?.Position, turnParams, Direction.LEFT)
 			       && Are0ClonesBlockedOnFloor(turnParams, blockedClonesPerFloor);
@@ -289,9 +297,8 @@ namespace codingame.dont.panic.TurnDecision
 
 		public override bool CanDecide(TurnParams turnParams, bool[] blockedClonesPerFloor)
 		{
-			var currentFloorElevator = GetCurrentFloorElevator(turnParams);
 			var previousFloorElevator = GetPreviousFloorElevator(turnParams);
-			return turnParams.IsHeadingInOppositeDirection(currentFloorElevator?.Position, Direction.RIGHT)
+			return turnParams.IsHeadingInOppositeDirection(Direction.RIGHT)
 			       && IsNearPreviousElevator(previousFloorElevator?.Position, turnParams, Direction.RIGHT)
 			       && Are0ClonesBlockedOnFloor(turnParams, blockedClonesPerFloor);
 		}
@@ -314,7 +321,7 @@ namespace codingame.dont.panic.TurnDecision
 		public override bool CanDecide(TurnParams turnParams, bool[] blockedClonesPerFloor)
 		{
 			var previousFloorElevator = GetPreviousFloorElevator(turnParams);
-			return turnParams.IsHeadingInOppositeDirection(DriveParams.ExitPosition, Direction.RIGHT)
+			return turnParams.IsHeadingInOppositeDirection(Direction.RIGHT)
 			       && turnParams.IsCloneOnExitFloor()
 			       && IsNearPreviousElevator(previousFloorElevator?.Position, turnParams, Direction.RIGHT)
 			       && Are0ClonesBlockedOnFloor(turnParams, blockedClonesPerFloor);

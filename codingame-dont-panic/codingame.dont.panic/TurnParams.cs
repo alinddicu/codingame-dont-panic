@@ -40,11 +40,11 @@
 			return CloneFloor == _driveParams.ExitFloor;
 		}
 
-		private int? GetObjectivePosition()
+		private int GetObjectivePosition()
 		{
 			return _driveParams.ExitFloor == CloneFloor
 				? _driveParams.ExitPosition
-				: _driveParams.Elevators.FirstOrDefault(e => e.Floor == CloneFloor && e.Position == ClonePosition)?.Position;
+				: _driveParams.Elevators.First(e => e.Floor == CloneFloor).Position;
 		}
 
 		public bool IsHeadingInOppositeDirection(Direction direction)

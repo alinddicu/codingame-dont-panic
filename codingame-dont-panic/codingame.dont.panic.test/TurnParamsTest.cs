@@ -63,5 +63,50 @@
 
 			Check.That(turnParams.IsCloneOnExitFloor()).IsFalse();
 		}
+
+		[TestMethod]
+		public void GivenElevatorAtLeftAndCloneGoingRightWhenIsHeadingInOppositeDirectionThenReturnTrue()
+		{
+			var consoleSimulator = new ConsoleSimulator("3 4 99 3 3 99 0 2", "1 0", "3 0");
+			var turnParams = new TurnParams("1 3 RIGHT", new DriveParams(consoleSimulator.ReadLine));
+
+			Check.That(turnParams.IsHeadingInOppositeDirection(Direction.RIGHT)).IsTrue();
+		}
+
+		[TestMethod]
+		public void GivenElevatorAtLeftAndCloneGoingRightAndReferenceDirectionLeftWhenIsHeadingInOppositeDirectionThenReturnFalse()
+		{
+			var consoleSimulator = new ConsoleSimulator("3 4 99 3 3 99 0 2", "1 0", "3 0");
+			var turnParams = new TurnParams("1 3 RIGHT", new DriveParams(consoleSimulator.ReadLine));
+
+			Check.That(turnParams.IsHeadingInOppositeDirection(Direction.LEFT)).IsFalse();
+		}
+
+		[TestMethod]
+		public void GivenElevatorAtLeftAndCloneGoingLeftWhenIsHeadingInOppositeDirectionThenReturnFalse()
+		{
+			var consoleSimulator = new ConsoleSimulator("3 4 99 3 3 99 0 2", "1 0", "3 0");
+			var turnParams = new TurnParams("1 3 LEFT", new DriveParams(consoleSimulator.ReadLine));
+
+			Check.That(turnParams.IsHeadingInOppositeDirection(Direction.LEFT)).IsFalse();
+		}
+
+		[TestMethod]
+		public void GivenExitAtLeftAndCloneGoingRightWhenIsHeadingInOppositeDirectionThenReturnTrue()
+		{
+			var consoleSimulator = new ConsoleSimulator("3 4 99 3 0 99 0 2", "1 0", "3 3");
+			var turnParams = new TurnParams("3 1 RIGHT", new DriveParams(consoleSimulator.ReadLine));
+
+			Check.That(turnParams.IsHeadingInOppositeDirection(Direction.RIGHT)).IsTrue();
+		}
+
+		[TestMethod]
+		public void GivenExitAtLeftAndCloneGoingLeftWhenIsHeadingInOppositeDirectionThenReturnFalse()
+		{
+			var consoleSimulator = new ConsoleSimulator("3 4 99 3 0 99 0 2", "1 0", "3 3");
+			var turnParams = new TurnParams("3 1 LEFT", new DriveParams(consoleSimulator.ReadLine));
+
+			Check.That(turnParams.IsHeadingInOppositeDirection(Direction.LEFT)).IsFalse();
+		}
 	}
 }
