@@ -65,48 +65,48 @@
 		}
 
 		[TestMethod]
-		public void GivenElevatorAtLeftAndCloneGoingRightWhenIsHeadingInOppositeDirectionThenReturnTrue()
+		public void GivenElevatorAtLeftAndCloneGoingRightWhenShouldCloneReverseThenReturnTrue()
 		{
 			var consoleSimulator = new ConsoleSimulator("3 4 99 3 3 99 0 2", "1 0", "3 0");
 			var turnParams = new TurnParams("1 3 RIGHT", new DriveParams(consoleSimulator.ReadLine));
 
-			Check.That(turnParams.IsHeadingInOppositeDirection(Direction.RIGHT)).IsTrue();
+			Check.That(turnParams.ShouldCloneReverse(Direction.RIGHT)).IsTrue();
 		}
 
 		[TestMethod]
-		public void GivenElevatorAtLeftAndCloneGoingRightAndReferenceDirectionLeftWhenIsHeadingInOppositeDirectionThenReturnFalse()
+		public void GivenElevatorAtLeftAndCloneGoingRightAndReferenceDirectionLeftWhenShouldCloneReverseThenReturnFalse()
 		{
 			var consoleSimulator = new ConsoleSimulator("3 4 99 3 3 99 0 2", "1 0", "3 0");
 			var turnParams = new TurnParams("1 3 RIGHT", new DriveParams(consoleSimulator.ReadLine));
 
-			Check.That(turnParams.IsHeadingInOppositeDirection(Direction.LEFT)).IsFalse();
+			Check.That(turnParams.ShouldCloneReverse(Direction.LEFT)).IsFalse();
 		}
 
 		[TestMethod]
-		public void GivenElevatorAtLeftAndCloneGoingLeftWhenIsHeadingInOppositeDirectionThenReturnFalse()
+		public void GivenElevatorAtLeftAndCloneGoingLeftWhenShouldCloneReverseThenReturnFalse()
 		{
 			var consoleSimulator = new ConsoleSimulator("3 4 99 3 3 99 0 2", "1 0", "3 0");
 			var turnParams = new TurnParams("1 3 LEFT", new DriveParams(consoleSimulator.ReadLine));
 
-			Check.That(turnParams.IsHeadingInOppositeDirection(Direction.LEFT)).IsFalse();
+			Check.That(turnParams.ShouldCloneReverse(Direction.LEFT)).IsFalse();
 		}
 
 		[TestMethod]
-		public void GivenExitAtLeftAndCloneGoingRightWhenIsHeadingInOppositeDirectionThenReturnTrue()
+		public void GivenExitAtLeftAndCloneGoingRightWhenShouldCloneReverseThenReturnTrue()
 		{
 			var consoleSimulator = new ConsoleSimulator("3 4 99 3 0 99 0 2", "1 0", "3 3");
 			var turnParams = new TurnParams("3 1 RIGHT", new DriveParams(consoleSimulator.ReadLine));
 
-			Check.That(turnParams.IsHeadingInOppositeDirection(Direction.RIGHT)).IsTrue();
+			Check.That(turnParams.ShouldCloneReverse(Direction.RIGHT)).IsTrue();
 		}
 
 		[TestMethod]
-		public void GivenExitAtLeftAndCloneGoingLeftWhenIsHeadingInOppositeDirectionThenReturnFalse()
+		public void GivenExitAtLeftAndCloneGoingLeftWhenShouldCloneReverseThenReturnFalse()
 		{
 			var consoleSimulator = new ConsoleSimulator("3 4 99 3 0 99 0 2", "1 0", "3 3");
 			var turnParams = new TurnParams("3 1 LEFT", new DriveParams(consoleSimulator.ReadLine));
 
-			Check.That(turnParams.IsHeadingInOppositeDirection(Direction.LEFT)).IsFalse();
+			Check.That(turnParams.ShouldCloneReverse(Direction.LEFT)).IsFalse();
 		}
 	}
 }

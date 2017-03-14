@@ -47,15 +47,15 @@
 				: _driveParams.Elevators.First(e => e.Floor == CloneFloor).Position;
 		}
 
-		public bool IsHeadingInOppositeDirection(Direction direction)
+		public bool ShouldCloneReverse(Direction referenceDirection)
 		{
-			if (CloneDirection != direction)
+			if (CloneDirection != referenceDirection)
 			{
 				return false;
 			}
 
 			var objectivePosition = GetObjectivePosition();
-			if (direction == Direction.RIGHT)
+			if (referenceDirection == Direction.RIGHT)
 			{
 				return ClonePosition > objectivePosition;
 			}
