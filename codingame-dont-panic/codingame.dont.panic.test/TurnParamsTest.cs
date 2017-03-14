@@ -19,7 +19,7 @@
 		[TestMethod]
 		public void GivenTurnParams00LeftWhenIsLeftCollisionThenTrue()
 		{
-			var turnParams = new TurnParams("0 0 LEFT", null);
+			var turnParams = new TurnParams("0 0 LEFT", new DriveParams(() => "2 3 99 1 3 2 0 1"));
 
 			Check.That(turnParams.IsLeftColision()).IsTrue();
 		}
@@ -27,7 +27,7 @@
 		[TestMethod]
 		public void GivenTurnParams00RightWhenIsLeftCollisionThenFalse()
 		{
-			var turnParams = new TurnParams("0 0 RIGHT", null);
+			var turnParams = new TurnParams("0 0 RIGHT", new DriveParams(() => "2 3 99 1 3 2 0 1"));
 
 			Check.That(turnParams.IsLeftColision()).IsFalse();
 		}
@@ -35,17 +35,17 @@
 		[TestMethod]
 		public void GivenTurnParams02RightAndDriveWidthOf3WhenIsLeftCollisionThenTrue()
 		{
-			var turnParams = new TurnParams("0 2 RIGHT", null);
+			var turnParams = new TurnParams("0 2 RIGHT", new DriveParams(() => "2 3 99 1 3 2 0 1"));
 
-			Check.That(turnParams.IsRightColision(3)).IsTrue();
+			Check.That(turnParams.IsRightColision()).IsTrue();
 		}
 
 		[TestMethod]
 		public void GivenTurnParams01RightAndDriveWidthOf3WhenIsLeftCollisionThenFalse()
 		{
-			var turnParams = new TurnParams("0 1 RIGHT", null);
+			var turnParams = new TurnParams("0 1 RIGHT", new DriveParams(() => "2 3 99 1 3 2 0 1"));
 
-			Check.That(turnParams.IsRightColision(3)).IsFalse();
+			Check.That(turnParams.IsRightColision()).IsFalse();
 		}
 
 		[TestMethod]

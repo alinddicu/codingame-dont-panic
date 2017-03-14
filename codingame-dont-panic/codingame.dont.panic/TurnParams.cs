@@ -29,9 +29,9 @@
 			return ClonePosition == 0 && CloneDirection == Direction.LEFT;
 		}
 
-		public bool IsRightColision(int driveWidth)
+		public bool IsRightColision()
 		{
-			return ClonePosition + 1 == driveWidth && CloneDirection == Direction.RIGHT;
+			return ClonePosition + 1 == _driveParams.DriveWidth && CloneDirection == Direction.RIGHT;
 		}
 
 		public bool IsCloneOnExitFloor()
