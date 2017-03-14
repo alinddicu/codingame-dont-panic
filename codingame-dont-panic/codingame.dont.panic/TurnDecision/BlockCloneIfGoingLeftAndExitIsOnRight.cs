@@ -10,7 +10,7 @@
 		{
 			var previousFloorElevator = GetPreviousFloorElevator(turnParams);
 			return IsHeadingInOppositeDirection(turnParams, DriveParams.ExitPosition, Direction.LEFT)
-			       && IsCloneOnExitFloor(turnParams)
+			       && turnParams.IsCloneOnExitFloor()
 			       && IsNearPreviousElevator(previousFloorElevator?.Position, turnParams, Direction.LEFT)
 			       && Are0ClonesBlockedOnFloor(turnParams, blockedClonesPerFloor);
 		}

@@ -4,14 +4,17 @@
 
 	public class TurnParams
 	{
+		private readonly DriveParams _driveParams;
+
 		public int CloneFloor { get; }
 
 		public int ClonePosition { get; }
 
 		public Direction Direction { get; }
 
-		public TurnParams(string readLineParams)
+		public TurnParams(string readLineParams, DriveParams driveParams)
 		{
+			_driveParams = driveParams;
 			var inputs = readLineParams.Split(' ');
 			// floor of the leading clone
 			CloneFloor = int.Parse(inputs[0]);
@@ -29,6 +32,11 @@
 		public bool IsRightColision(int driveWidth)
 		{
 			return ClonePosition + 1 == driveWidth && Direction == Direction.RIGHT;
+		}
+
+		public bool IsCloneOnExitFloor()
+		{
+			return CloneFloor == _driveParams.ExitFloor;
 		}
 	}
 }

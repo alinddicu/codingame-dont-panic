@@ -36,11 +36,6 @@
 			return TurnDecision.BLOCK;
 		}
 
-		protected bool IsCloneOnExitFloor(TurnParams turnParams)
-		{
-			return turnParams.CloneFloor == DriveParams.ExitFloor;
-		}
-
 		protected static bool IsHeadingInOppositeDirection(TurnParams turnParams, int? objectivePosition, Direction direction)
 		{
 			if (turnParams.Direction != direction)
