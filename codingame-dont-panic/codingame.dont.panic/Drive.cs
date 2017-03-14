@@ -22,7 +22,7 @@
 			// game loop
 			while (true)
 			{
-				var turnParams = new TurnParams(_readLine);
+				var turnParams = new TurnParams(_readLine());
 				if (turnParams.Direction == Direction.EXIT)
 				{
 					break;

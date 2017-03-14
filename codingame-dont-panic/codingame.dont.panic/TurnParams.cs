@@ -10,9 +10,9 @@
 
 		public Direction Direction { get; }
 
-		public TurnParams(Func<string> readLine)
+		public TurnParams(string readLineParams)
 		{
-			var inputs = readLine().Split(' ');
+			var inputs = readLineParams.Split(' ');
 			// floor of the leading clone
 			CloneFloor = int.Parse(inputs[0]);
 			// position of the leading clone on its floor
