@@ -9,6 +9,11 @@ namespace codingame.dont.panic.test
 		private readonly List<string> _writtenLines = new List<string>();
 		private int _readLinesCount;
 
+		public static ConsoleSimulator Create()
+		{
+			return new ConsoleSimulator("8 7 6 5 4 3 2 0");
+		}
+
 		public ConsoleSimulator(params string[] linesToRead)
 		{
 			_linesToRead = linesToRead;
