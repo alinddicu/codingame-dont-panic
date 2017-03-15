@@ -17,7 +17,7 @@
 		public void Run()
 		{
 			var driveParams = new DriveParams(_readLine);
-			var drive = new CloneMaster(driveParams, new TurnDecisionsFactory(driveParams));
+			var drive = new CloneMaster(driveParams, new TurnDecisionsFactory());
 
 			// game loop
 			while (true)

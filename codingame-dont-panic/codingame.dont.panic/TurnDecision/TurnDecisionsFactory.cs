@@ -4,21 +4,14 @@
 
 	public class TurnDecisionsFactory
 	{
-		private readonly DriveParams _driveParams;
-
-		public TurnDecisionsFactory(DriveParams driveParams)
-		{
-			_driveParams = driveParams;
-		}
-
 		public IEnumerable<TurnDecisionBase> Create()
 		{
-			yield return new BlockCloneBeforeColision(_driveParams);
-			yield return new BlockCloneIfGoingLeftAndElevatorIsOnRight(_driveParams);
-			yield return new BlockCloneIfGoingLeftAndExitIsOnRight(_driveParams);
-			yield return new BlockCloneIfGoingRightAndElevatorIsOnLeft(_driveParams);
-			yield return new BlockCloneIfGoingRightAndExitIsOnLeft(_driveParams);
-			yield return new Wait(_driveParams);
+			yield return new BlockCloneBeforeColision();
+			yield return new BlockCloneIfGoingLeftAndElevatorIsOnRight();
+			yield return new BlockCloneIfGoingLeftAndExitIsOnRight();
+			yield return new BlockCloneIfGoingRightAndElevatorIsOnLeft();
+			yield return new BlockCloneIfGoingRightAndExitIsOnLeft();
+			yield return new Wait();
 		}
 	}
 }

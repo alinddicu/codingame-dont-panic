@@ -11,7 +11,7 @@
 		[TestMethod]
 		public void WhenCreateThenTurnDecisionsAreGeneratedInTheCorrectOrder()
 		{
-			var factory = new TurnDecisionsFactory(new DriveParams(ConsoleSimulator.Create().ReadLine));
+			var factory = new TurnDecisionsFactory();
 
 			var turnDecisionTypes = factory.Create().Select(td => td.GetType()).ToArray();
 

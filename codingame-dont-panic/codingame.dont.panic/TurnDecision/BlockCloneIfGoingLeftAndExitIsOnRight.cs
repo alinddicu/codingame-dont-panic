@@ -2,10 +2,6 @@
 {
 	public class BlockCloneIfGoingLeftAndExitIsOnRight : TurnDecisionBase
 	{
-		public BlockCloneIfGoingLeftAndExitIsOnRight(DriveParams driveParams) : base(driveParams)
-		{
-		}
-
 		public override bool CanDecide(TurnParams turnParams, bool[] blockedClonesPerFloor)
 		{
 			return turnParams.ShouldCloneReverse(Direction.LEFT)

@@ -2,10 +2,6 @@
 {
 	public class Wait : TurnDecisionBase
 	{
-		public Wait(DriveParams driveParams) : base(driveParams)
-		{
-		}
-
 		public override bool CanDecide(TurnParams turnParams, bool[] blockedClonesPerFloor)
 		{
 			return true;

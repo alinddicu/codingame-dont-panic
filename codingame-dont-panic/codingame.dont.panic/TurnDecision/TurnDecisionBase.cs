@@ -4,13 +4,6 @@
 
 	public abstract class TurnDecisionBase
 	{
-		private readonly DriveParams _driveParams;
-
-		protected TurnDecisionBase(DriveParams driveParams)
-		{
-			_driveParams = driveParams;
-		}
-
 		public abstract bool CanDecide(TurnParams turnParams, bool[] blockedClonesPerFloor);
 
 		public abstract TurnDecision Decide(TurnParams turnParams, bool[] blockedClonesPerFloor);

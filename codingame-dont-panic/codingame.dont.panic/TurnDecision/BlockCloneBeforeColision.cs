@@ -2,10 +2,6 @@
 {
 	public class BlockCloneBeforeColision : TurnDecisionBase
 	{
-		public BlockCloneBeforeColision(DriveParams driveParams) : base(driveParams)
-		{
-		}
-
 		public override bool CanDecide(TurnParams turnParams, bool[] blockedClonesPerFloor)
 		{
 			return turnParams.IsLeftColision() || turnParams.IsRightColision();
