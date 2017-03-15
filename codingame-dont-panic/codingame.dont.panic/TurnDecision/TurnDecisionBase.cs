@@ -4,19 +4,26 @@
 
 	public abstract class TurnDecisionBase
 	{
-		public abstract bool CanDecide(TurnParams turnParams, bool[] blockedClonesPerFloor);
+		private readonly bool[] _blockedClonesPerFloor;
 
-		public abstract TurnDecision Decide(TurnParams turnParams, bool[] blockedClonesPerFloor);
-
-		protected static TurnDecision IncrementBlockedClonesPerFloorAndBlock(TurnParams turnParams, bool[] blockedClonesPerFloor)
+		protected TurnDecisionBase(bool[] blockedClonesPerFloor)
 		{
-			blockedClonesPerFloor[turnParams.CloneFloor] = true;
+			_blockedClonesPerFloor = blockedClonesPerFloor;
+		}
+
+		public abstract bool CanDecide(TurnParams turnParams);
+
+		public abstract TurnDecision Decide(TurnParams turnParams);
+
+		protected TurnDecision BlockClone(TurnParams turnParams)
+		{
+			_blockedClonesPerFloor[turnParams.CloneFloor] = true;
 			return TurnDecision.BLOCK;
 		}
 
-		protected static bool Are0ClonesBlockedOnFloor(TurnParams turnParams, bool[] blockedClonesPerFloor)
+		protected bool Are0ClonesBlockedOnFloor(TurnParams turnParams)
 		{
-			return !blockedClonesPerFloor[turnParams.CloneFloor];
+			return !_blockedClonesPerFloor[turnParams.CloneFloor];
 		}
 	}
 }

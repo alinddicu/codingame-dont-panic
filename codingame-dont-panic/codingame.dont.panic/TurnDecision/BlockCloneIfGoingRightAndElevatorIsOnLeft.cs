@@ -2,16 +2,21 @@
 {
 	public class BlockCloneIfGoingRightAndElevatorIsOnLeft : TurnDecisionBase
 	{
-		public override bool CanDecide(TurnParams turnParams, bool[] blockedClonesPerFloor)
+		public BlockCloneIfGoingRightAndElevatorIsOnLeft(bool[] blockedClonesPerFloor) 
+			: base(blockedClonesPerFloor)
+		{
+		}
+
+		public override bool CanDecide(TurnParams turnParams)
 		{
 			return turnParams.ShouldCloneReverse(Direction.RIGHT)
 			       && turnParams.IsCloneNearPreviousElevator(Direction.RIGHT)
-			       && Are0ClonesBlockedOnFloor(turnParams, blockedClonesPerFloor);
+			       && Are0ClonesBlockedOnFloor(turnParams);
 		}
 
-		public override TurnDecision Decide(TurnParams turnParams, bool[] blockedClonesPerFloor)
+		public override TurnDecision Decide(TurnParams turnParams)
 		{
-			return IncrementBlockedClonesPerFloorAndBlock(turnParams, blockedClonesPerFloor);
+			return BlockClone(turnParams);
 		}
 	}
 }

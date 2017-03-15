@@ -2,12 +2,17 @@
 {
 	public class Wait : TurnDecisionBase
 	{
-		public override bool CanDecide(TurnParams turnParams, bool[] blockedClonesPerFloor)
+		public Wait(bool[] blockedClonesPerFloor) 
+			: base(blockedClonesPerFloor)
+		{
+		}
+
+		public override bool CanDecide(TurnParams turnParams)
 		{
 			return true;
 		}
 
-		public override TurnDecision Decide(TurnParams turnParams, bool[] blockedClonesPerFloor)
+		public override TurnDecision Decide(TurnParams turnParams)
 		{
 			return TurnDecision.WAIT;
 		}

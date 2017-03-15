@@ -4,14 +4,14 @@
 
 	public class TurnDecisionsFactory
 	{
-		public IEnumerable<TurnDecisionBase> Create()
+		public IEnumerable<TurnDecisionBase> Create(bool[] blockedClonesPerFloor)
 		{
-			yield return new BlockCloneBeforeColision();
-			yield return new BlockCloneIfGoingLeftAndElevatorIsOnRight();
-			yield return new BlockCloneIfGoingLeftAndExitIsOnRight();
-			yield return new BlockCloneIfGoingRightAndElevatorIsOnLeft();
-			yield return new BlockCloneIfGoingRightAndExitIsOnLeft();
-			yield return new Wait();
+			yield return new BlockCloneBeforeColision(blockedClonesPerFloor);
+			yield return new BlockCloneIfGoingLeftAndElevatorIsOnRight(blockedClonesPerFloor);
+			yield return new BlockCloneIfGoingLeftAndExitIsOnRight(blockedClonesPerFloor);
+			yield return new BlockCloneIfGoingRightAndElevatorIsOnLeft(blockedClonesPerFloor);
+			yield return new BlockCloneIfGoingRightAndExitIsOnLeft(blockedClonesPerFloor);
+			yield return new Wait(blockedClonesPerFloor);
 		}
 	}
 }

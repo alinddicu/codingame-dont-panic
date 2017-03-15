@@ -12,14 +12,14 @@
 		public CloneMaster(DriveParams driveParams, TurnDecisionsFactory turnDecisionsFactory)
 		{
 			_blockedClonesPerFloor = new bool[driveParams.FloorCount];
-			_turnDecisions = turnDecisionsFactory.Create();
+			_turnDecisions = turnDecisionsFactory.Create(_blockedClonesPerFloor);
 		}
 
 		public TurnDecision.TurnDecision Decide(TurnParams turnParams)
 		{
 			return _turnDecisions
-				.First(td => td.CanDecide(turnParams, _blockedClonesPerFloor))
-				.Decide(turnParams, _blockedClonesPerFloor);
+				.First(td => td.CanDecide(turnParams))
+				.Decide(turnParams);
 		}
 	}
 }
