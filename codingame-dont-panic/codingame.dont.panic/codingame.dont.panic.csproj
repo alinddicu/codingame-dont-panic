@@ -41,10 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="TurnDecision\BlockCloneBeforeColision.cs" />
-    <Compile Include="TurnDecision\BlockCloneIfGoingLeftAndElevatorIsOnRight.cs" />
-    <Compile Include="TurnDecision\BlockCloneIfGoingLeftAndExitIsOnRight.cs" />
-    <Compile Include="TurnDecision\BlockCloneIfGoingRightAndElevatorIsOnLeft.cs" />
-    <Compile Include="TurnDecision\BlockCloneIfGoingRightAndExitIsOnLeft.cs" />
+    <Compile Include="TurnDecision\BlockCloneIfGoingOppositeOfObjective.cs" />
     <Compile Include="CloneMaster.cs" />
     <Compile Include="Direction.cs" />
     <Compile Include="Drive.cs" />

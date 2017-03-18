@@ -15,7 +15,7 @@
 
 			var turnDecisionTypes = factory.Create().Select(td => td.GetType()).ToArray();
 
-			Check.That(turnDecisionTypes).HasSize(6);
+			Check.That(turnDecisionTypes).HasSize(4);
 			Check.That(turnDecisionTypes.Last()).IsEqualTo(typeof(Wait));
 		}
 	}

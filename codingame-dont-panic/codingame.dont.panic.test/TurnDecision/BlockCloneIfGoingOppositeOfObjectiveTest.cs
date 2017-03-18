@@ -5,12 +5,12 @@
 	using panic.TurnDecision;
 
 	[TestClass]
-	public	class BlockCloneIfGoingLeftAndElevatorIsOnRightTest
+	public	class BlockCloneIfGoingOppositeOfObjectiveTest
 	{
 		[TestMethod]
 		public void GivenBlockCloneIfGoingLeftAndElevatorIsOnRightWhenCanDecideThenTrue()
 		{
-			var turnDecision = new BlockCloneIfGoingLeftAndElevatorIsOnRight();
+			var turnDecision = new BlockCloneIfGoingOppositeOfObjective(Direction.LEFT);
 			var driveParams = DriveParamsTest.Create(2, 4, 1, 2, 2, new Elevator("0 2"), new Elevator("1 3"));
 			var turnParams = new TurnParams("1 1 LEFT", driveParams);
 
@@ -21,7 +21,7 @@
 		[TestMethod]
 		public void GivenBlockCloneIfGoingLeftAndElevatorIsOnRightWhenCannotDecideThenFalse()
 		{
-			var turnDecision = new BlockCloneIfGoingLeftAndElevatorIsOnRight();
+			var turnDecision = new BlockCloneIfGoingOppositeOfObjective(Direction.LEFT);
 			var driveParams = DriveParamsTest.Create(2, 4, 1, 2, 2, new Elevator("0 2"), new Elevator("1 3"));
 			var turnParams = new TurnParams("1 1 RIGHT", driveParams);
 

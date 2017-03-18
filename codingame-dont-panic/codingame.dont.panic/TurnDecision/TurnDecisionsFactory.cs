@@ -7,10 +7,8 @@
 		public IEnumerable<TurnDecisionBase> Create()
 		{
 			yield return new BlockCloneBeforeColision();
-			yield return new BlockCloneIfGoingLeftAndElevatorIsOnRight();
-			yield return new BlockCloneIfGoingLeftAndExitIsOnRight();
-			yield return new BlockCloneIfGoingRightAndElevatorIsOnLeft();
-			yield return new BlockCloneIfGoingRightAndExitIsOnLeft();
+			yield return new BlockCloneIfGoingOppositeOfObjective(Direction.LEFT);
+			yield return new BlockCloneIfGoingOppositeOfObjective(Direction.RIGHT);
 			yield return new Wait();
 		}
 	}
