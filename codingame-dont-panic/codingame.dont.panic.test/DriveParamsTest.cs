@@ -16,6 +16,26 @@
 			TestDriveParams(driveParams);
 		}
 
+		public static DriveParams Create(
+			int floorCount,
+			int driveWidth,
+			int exitFloor,
+			int exitPosition,
+			int elevatorsCount,
+			params Elevator[] elevators)
+		{
+			var simulator = new ConsoleSimulator(
+				floorCount,
+				driveWidth,
+				exitFloor,
+				exitPosition,
+				elevatorsCount,
+				elevators);
+
+			var driveParams = new DriveParams(simulator.ReadLine);
+			return driveParams;
+		}
+
 		public static DriveParams Create()
 		{
 			var simulator = new ConsoleSimulator(
