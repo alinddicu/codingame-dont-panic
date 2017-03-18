@@ -35,11 +35,6 @@
 			return ClonePosition + 1 == _driveParams.DriveWidth && CloneDirection == Direction.RIGHT;
 		}
 
-		public bool IsCloneOnExitFloor()
-		{
-			return CloneFloor == _driveParams.ExitFloor;
-		}
-
 		private int GetObjectivePosition()
 		{
 			return _driveParams.ExitFloor == CloneFloor

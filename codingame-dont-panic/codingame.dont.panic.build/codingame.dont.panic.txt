@@ -189,11 +189,6 @@ namespace codingame.dont.panic
 			return ClonePosition + 1 == _driveParams.DriveWidth && CloneDirection == Direction.RIGHT;
 		}
 
-		public bool IsCloneOnExitFloor()
-		{
-			return CloneFloor == _driveParams.ExitFloor;
-		}
-
 		private int GetObjectivePosition()
 		{
 			return _driveParams.ExitFloor == CloneFloor
@@ -295,9 +290,7 @@ namespace codingame.dont.panic.TurnDecision
 		public override bool CanDecide(TurnParams turnParams)
 		{
 			return turnParams.ShouldCloneReverse(Direction.LEFT)
-			       && turnParams.IsCloneOnExitFloor()
-				   && turnParams.IsCloneNearPreviousElevator(Direction.LEFT)
-			       && Are0ClonesBlockedOnFloor(turnParams);
+				   && turnParams.IsCloneNearPreviousElevator(Direction.LEFT);
 		}
 
 		public override TurnDecision Decide(TurnParams turnParams)
@@ -341,9 +334,7 @@ namespace codingame.dont.panic.TurnDecision
 		public override bool CanDecide(TurnParams turnParams)
 		{
 			return turnParams.ShouldCloneReverse(Direction.RIGHT)
-			       && turnParams.IsCloneOnExitFloor()
-				   && turnParams.IsCloneNearPreviousElevator(Direction.RIGHT)
-			       && Are0ClonesBlockedOnFloor(turnParams);
+				   && turnParams.IsCloneNearPreviousElevator(Direction.RIGHT);
 		}
 
 		public override TurnDecision Decide(TurnParams turnParams)

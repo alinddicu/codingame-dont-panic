@@ -53,24 +53,6 @@
 		}
 
 		[TestMethod]
-		public void GivenTurnParams11RightAndCloneOn8ThFloorWhenIsCloneOnExitFloorThenReturnTrue()
-		{
-			var driveParams = new DriveParams(new ConsoleSimulator(2, 3, 1, 3, 0).ReadLine);
-			var turnParams = new TurnParams("1 1 RIGHT", driveParams);
-
-			Check.That(turnParams.IsCloneOnExitFloor()).IsTrue();
-		}
-
-		[TestMethod]
-		public void GivenTurnParams01RightAndCloneOn2ndFloorWhenIsCloneOnExitFloorThenReturnFalse()
-		{
-			var driveParams = new DriveParams(new ConsoleSimulator(2, 3, 1, 3, 0).ReadLine);
-			var turnParams = new TurnParams("0 1 RIGHT", driveParams);
-
-			Check.That(turnParams.IsCloneOnExitFloor()).IsFalse();
-		}
-
-		[TestMethod]
 		public void GivenElevatorAtLeftAndCloneGoingRightWhenShouldCloneReverseThenReturnTrue()
 		{
 			var driveParams = new DriveParams(new ConsoleSimulator(3, 4, 3, 3, 2, new Elevator("1 0 "), new Elevator("3 0")).ReadLine);

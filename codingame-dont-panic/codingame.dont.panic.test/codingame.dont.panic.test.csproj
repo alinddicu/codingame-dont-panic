@@ -65,6 +65,7 @@
     <Compile Include="TurnDecision\BlockCloneBeforeColisionTest.cs" />
     <Compile Include="TurnDecision\BlockCloneIfGoingLeftAndElevatorIsOnRightTest.cs" />
     <Compile Include="TurnDecision\TurnDecisionsFactoryTest.cs" />
+    <Compile Include="TurnDecision\BlockCloneIfGoingLeftAndExitIsOnRightTest.cs" />
     <Compile Include="TurnDecision\WaitTest.cs" />
     <Compile Include="TurnParamsTest.cs" />
   </ItemGroup>
