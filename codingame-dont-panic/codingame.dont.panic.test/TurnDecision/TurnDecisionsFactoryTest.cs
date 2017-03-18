@@ -13,7 +13,7 @@
 		{
 			var factory = new TurnDecisionsFactory();
 
-			var turnDecisionTypes = factory.Create(new bool[4]).Select(td => td.GetType()).ToArray();
+			var turnDecisionTypes = factory.Create().Select(td => td.GetType()).ToArray();
 
 			Check.That(turnDecisionTypes).HasSize(6);
 			Check.That(turnDecisionTypes.Last()).IsEqualTo(typeof(Wait));

@@ -11,13 +11,11 @@
 		[TestMethod]
 		public void GivenWaitTurnDecisionBaseWhenCanDecideThenTrue()
 		{
-			var blockedClonesPerFloor = new bool[4];
-			var waitTurnDecisionBase = new Wait(blockedClonesPerFloor);
+			var waitTurnDecisionBase = new Wait();
 			var turnParams = new TurnParams("0 1 RIGHT", DriveParamsTest.Create());
 
 			Check.That(waitTurnDecisionBase.CanDecide(turnParams)).IsTrue();
 			Check.That(waitTurnDecisionBase.Decide(turnParams)).IsEqualTo(TurnDecision.WAIT);
-			Check.That(blockedClonesPerFloor.Distinct().Single()).IsEqualTo(false);
 		}
 	}
 }

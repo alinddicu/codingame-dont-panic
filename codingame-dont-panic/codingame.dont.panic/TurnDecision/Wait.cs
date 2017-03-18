@@ -2,11 +2,6 @@
 {
 	public class Wait : TurnDecisionBase
 	{
-		public Wait(bool[] blockedClonesPerFloor) 
-			: base(blockedClonesPerFloor)
-		{
-		}
-
 		public override bool CanDecide(TurnParams turnParams)
 		{
 			return true;

@@ -2,11 +2,6 @@
 {
 	public class BlockCloneIfGoingRightAndElevatorIsOnLeft : TurnDecisionBase
 	{
-		public BlockCloneIfGoingRightAndElevatorIsOnLeft(bool[] blockedClonesPerFloor) 
-			: base(blockedClonesPerFloor)
-		{
-		}
-
 		public override bool CanDecide(TurnParams turnParams)
 		{
 			return turnParams.ShouldCloneReverse(Direction.RIGHT)
