@@ -1,7 +1,5 @@
 ﻿namespace codingame.dont.panic.TurnDecision
 {
-	using System.Linq;
-
 	public abstract class TurnDecisionBase
 	{
 		private readonly bool[] _blockedClonesPerFloor;

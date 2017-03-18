@@ -11,6 +11,13 @@
 		[TestMethod]
 		public void GivenDriveParamsFromStandardInputWhenCreateThenValuesOfDriveParamsAreCorrect()
 		{
+			var driveParams = Create();
+
+			TestDriveParams(driveParams);
+		}
+
+		public static DriveParams Create()
+		{
 			var simulator = new ConsoleSimulator(
 				"8 7 6 5 4 3 2 2",
 				"2 1",
@@ -18,8 +25,7 @@
 			);
 
 			var driveParams = new DriveParams(simulator.ReadLine);
-
-			TestDriveParams(driveParams);
+			return driveParams;
 		}
 
 		public static void TestDriveParams(DriveParams driveParams)
