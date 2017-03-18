@@ -10,8 +10,7 @@
 		public override bool CanDecide(TurnParams turnParams)
 		{
 			return turnParams.ShouldCloneReverse(Direction.RIGHT)
-			       && turnParams.IsCloneNearPreviousElevator(Direction.RIGHT)
-			       && Are0ClonesBlockedOnFloor(turnParams);
+			       && turnParams.IsCloneNearPreviousElevator(Direction.RIGHT);
 		}
 
 		public override TurnDecision Decide(TurnParams turnParams)

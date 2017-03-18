@@ -273,8 +273,7 @@ namespace codingame.dont.panic.TurnDecision
 		public override bool CanDecide(TurnParams turnParams)
 		{
 			return turnParams.ShouldCloneReverse(Direction.LEFT)
-			       && turnParams.IsCloneNearPreviousElevator(Direction.LEFT)
-			       && Are0ClonesBlockedOnFloor(turnParams);
+			       && turnParams.IsCloneNearPreviousElevator(Direction.LEFT);
 		}
 
 		public override TurnDecision Decide(TurnParams turnParams)
@@ -320,8 +319,7 @@ namespace codingame.dont.panic.TurnDecision
 		public override bool CanDecide(TurnParams turnParams)
 		{
 			return turnParams.ShouldCloneReverse(Direction.RIGHT)
-			       && turnParams.IsCloneNearPreviousElevator(Direction.RIGHT)
-			       && Are0ClonesBlockedOnFloor(turnParams);
+			       && turnParams.IsCloneNearPreviousElevator(Direction.RIGHT);
 		}
 
 		public override TurnDecision Decide(TurnParams turnParams)
@@ -366,8 +364,6 @@ namespace codingame.dont.panic.TurnDecision
 
 namespace codingame.dont.panic.TurnDecision
 {
-	using System.Linq;
-
 	public abstract class TurnDecisionBase
 	{
 		private readonly bool[] _blockedClonesPerFloor;
