@@ -22,7 +22,7 @@
 			var driveParams = new DriveParams(new ConsoleSimulator(2, 3, 1, 3, 0).ReadLine);
 			var turnParams = new TurnParams("0 0 LEFT", driveParams);
 
-			Check.That(turnParams.IsLeftColision()).IsTrue();
+			Check.That(turnParams.IsColision()).IsTrue();
 		}
 
 		[TestMethod]
@@ -31,7 +31,7 @@
 			var driveParams = new DriveParams(new ConsoleSimulator(2, 3, 1, 3, 0).ReadLine);
 			var turnParams = new TurnParams("0 0 RIGHT", driveParams);
 
-			Check.That(turnParams.IsLeftColision()).IsFalse();
+			Check.That(turnParams.IsColision()).IsFalse();
 		}
 
 		[TestMethod]
@@ -40,7 +40,7 @@
 			var driveParams = new DriveParams(new ConsoleSimulator(2, 3, 1, 3, 0).ReadLine);
 			var turnParams = new TurnParams("0 2 RIGHT", driveParams);
 
-			Check.That(turnParams.IsRightColision()).IsTrue();
+			Check.That(turnParams.IsColision()).IsTrue();
 		}
 
 		[TestMethod]
@@ -49,13 +49,13 @@
 			var driveParams = new DriveParams(new ConsoleSimulator(2, 3, 1, 3, 0).ReadLine);
 			var turnParams = new TurnParams("0 1 RIGHT", driveParams);
 
-			Check.That(turnParams.IsRightColision()).IsFalse();
+			Check.That(turnParams.IsColision()).IsFalse();
 		}
 
 		[TestMethod]
 		public void GivenElevatorAtLeftAndCloneGoingRightWhenShouldCloneReverseThenReturnTrue()
 		{
-			var driveParams = new DriveParams(new ConsoleSimulator(3, 4, 3, 3, 2, new Elevator("1 0 "), new Elevator("3 0")).ReadLine);
+			var driveParams = new DriveParams(new ConsoleSimulator(3, 4, 3, 3, 2, new Elevator("1 0"), new Elevator("3 0")).ReadLine);
 			var turnParams = new TurnParams("1 3 RIGHT", driveParams);
 
 			Check.That(turnParams.ShouldCloneReverse(Direction.RIGHT)).IsTrue();
@@ -64,7 +64,7 @@
 		[TestMethod]
 		public void GivenElevatorAtLeftAndCloneGoingRightAndReferenceDirectionLeftWhenShouldCloneReverseThenReturnFalse()
 		{
-			var driveParams = new DriveParams(new ConsoleSimulator(3, 4, 3, 3, 2, new Elevator("1 0 "), new Elevator("3 0")).ReadLine);
+			var driveParams = new DriveParams(new ConsoleSimulator(3, 4, 3, 3, 2, new Elevator("1 0"), new Elevator("3 0")).ReadLine);
 			var turnParams = new TurnParams("1 3 RIGHT", driveParams);
 
 			Check.That(turnParams.ShouldCloneReverse(Direction.LEFT)).IsFalse();
@@ -73,7 +73,7 @@
 		[TestMethod]
 		public void GivenElevatorAtLeftAndCloneGoingLeftWhenShouldCloneReverseThenReturnFalse()
 		{
-			var driveParams = new DriveParams(new ConsoleSimulator(3, 4, 3, 3, 2, new Elevator("1 0 "), new Elevator("3 0")).ReadLine);
+			var driveParams = new DriveParams(new ConsoleSimulator(3, 4, 3, 3, 2, new Elevator("1 0"), new Elevator("3 0")).ReadLine);
 			var turnParams = new TurnParams("1 3 LEFT", driveParams);
 
 			Check.That(turnParams.ShouldCloneReverse(Direction.LEFT)).IsFalse();
@@ -82,7 +82,7 @@
 		[TestMethod]
 		public void GivenExitAtLeftAndCloneGoingRightWhenShouldCloneReverseThenReturnTrue()
 		{
-			var driveParams = new DriveParams(new ConsoleSimulator(3, 4, 3, 0, 2, new Elevator("1 0 "), new Elevator("3 0 ")).ReadLine);
+			var driveParams = new DriveParams(new ConsoleSimulator(3, 4, 3, 0, 2, new Elevator("1 0"), new Elevator("3 0")).ReadLine);
 			var turnParams = new TurnParams("3 1 RIGHT", driveParams);
 
 			Check.That(turnParams.ShouldCloneReverse(Direction.RIGHT)).IsTrue();
@@ -91,10 +91,55 @@
 		[TestMethod]
 		public void GivenExitAtLeftAndCloneGoingLeftWhenShouldCloneReverseThenReturnFalse()
 		{
-			var driveParams = new DriveParams(new ConsoleSimulator(3, 4, 3, 0, 2, new Elevator("1 0 "), new Elevator("3 0 ")).ReadLine);
+			var driveParams = new DriveParams(new ConsoleSimulator(3, 4, 3, 0, 2, new Elevator("1 0"), new Elevator("3 0")).ReadLine);
 			var turnParams = new TurnParams("3 1 LEFT", driveParams);
 
 			Check.That(turnParams.ShouldCloneReverse(Direction.LEFT)).IsFalse();
+		}
+
+		[TestMethod]
+		public void GivenGroundFloorAndGoingLeftWhenIsCloneNearPreviousElevatorTheFalse()
+		{
+			var driveParams = new DriveParams(new ConsoleSimulator(1, 4, 1, 3, 1, new Elevator("0 0")).ReadLine);
+			var turnParams = new TurnParams("0 2 LEFT", driveParams);
+
+			Check.That(turnParams.IsCloneNearPreviousElevator(Direction.LEFT)).IsFalse();
+		}
+
+		[TestMethod]
+		public void GivenGroundFloorAndGoingRightWhenIsCloneNearPreviousElevatorTheFalse()
+		{
+			var driveParams = new DriveParams(new ConsoleSimulator(1, 4, 1, 3, 1, new Elevator("0 0")).ReadLine);
+			var turnParams = new TurnParams("0 1 RIGHT", driveParams);
+
+			Check.That(turnParams.IsCloneNearPreviousElevator(Direction.RIGHT)).IsFalse();
+		}
+
+		[TestMethod]
+		public void Given1StFloorAndGoingRightWhenIsCloneNearPreviousElevatorTheTrue()
+		{
+			var driveParams = new DriveParams(new ConsoleSimulator(2, 4, 1, 3, 1, new Elevator("0 0")).ReadLine);
+			var turnParams = new TurnParams("1 1 RIGHT", driveParams);
+
+			Check.That(turnParams.IsCloneNearPreviousElevator(Direction.RIGHT)).IsTrue();
+		}
+
+		[TestMethod]
+		public void Given1StFloorAndGoingLeftWhenIsCloneNearPreviousElevatorTheTrue()
+		{
+			var driveParams = new DriveParams(new ConsoleSimulator(2, 4, 1, 0, 1, new Elevator("0 2")).ReadLine);
+			var turnParams = new TurnParams("1 1 LEFT", driveParams);
+
+			Check.That(turnParams.IsCloneNearPreviousElevator(Direction.LEFT)).IsTrue();
+		}
+
+		[TestMethod]
+		public void Given1StFloorAndGoingLeftWhenNotIsCloneNearPreviousElevatorTheFalse()
+		{
+			var driveParams = new DriveParams(new ConsoleSimulator(2, 4, 1, 0, 1, new Elevator("0 2")).ReadLine);
+			var turnParams = new TurnParams("1 2 LEFT", driveParams);
+
+			Check.That(turnParams.IsCloneNearPreviousElevator(Direction.LEFT)).IsFalse();
 		}
 	}
 }

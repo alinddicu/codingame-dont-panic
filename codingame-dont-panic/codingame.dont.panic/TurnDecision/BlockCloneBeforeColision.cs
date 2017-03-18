@@ -4,7 +4,7 @@
 	{
 		public override bool CanDecide(TurnParams turnParams)
 		{
-			return turnParams.IsLeftColision() || turnParams.IsRightColision();
+			return turnParams.IsColision();
 		}
 
 		public override TurnDecision Decide(TurnParams turnParams)

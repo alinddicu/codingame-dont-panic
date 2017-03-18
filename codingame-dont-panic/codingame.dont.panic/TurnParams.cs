@@ -25,12 +25,17 @@
 			CloneDirection = (Direction)Enum.Parse(typeof(Direction), inputs[2]);
 		}
 
-		public bool IsLeftColision()
+		public bool IsColision()
+		{
+			return IsLeftColision() || IsRightColision();
+		}
+
+		private bool IsLeftColision()
 		{
 			return ClonePosition == 0 && CloneDirection == Direction.LEFT;
 		}
 
-		public bool IsRightColision()
+		private bool IsRightColision()
 		{
 			return ClonePosition + 1 == _driveParams.DriveWidth && CloneDirection == Direction.RIGHT;
 		}
