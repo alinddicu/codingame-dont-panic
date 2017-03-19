@@ -42,6 +42,7 @@
 
 		private Elevator GetClosestElevator(int cloneFloor, int clonePosition)
 		{
+			throw new NotImplementedException();
 		}
 	}
 }
