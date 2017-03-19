@@ -100,7 +100,8 @@
 		[TestMethod]
 		public void Given2ElevatorPerFloorWhenShouldCloneReverseThenReturnTrue()
 		{
-			var driveParams = new DriveParams(new ConsoleSimulator(3, 9, 2, 8, 3, new Elevator("0 4"), new Elevator("1 0"), new Elevator("1 6")).ReadLine);
+			var elevators = new[] { new Elevator("0 4"), new Elevator("1 0"), new Elevator("1 5") };
+			var driveParams = new DriveParams(new ConsoleSimulator(3, 9, 2, 8, 3, elevators).ReadLine);
 			var turnParams = new TurnParams("1 3 LEFT", driveParams);
 
 			Check.That(turnParams.ShouldCloneReverse(Direction.LEFT)).IsTrue();

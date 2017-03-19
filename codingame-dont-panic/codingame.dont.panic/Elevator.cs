@@ -1,5 +1,7 @@
 ﻿namespace codingame.dont.panic
 {
+	using System;
+
 	public class Elevator
 	{
 		public Elevator(string readLine)
@@ -16,6 +18,11 @@
 		public override string ToString()
 		{
 			return string.Format("{0} {1}", Floor, Position);
+		}
+
+		public int GetDistance(int position)
+		{
+			return Math.Abs(Position - position);
 		}
 	}
 }

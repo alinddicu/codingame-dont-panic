@@ -73,6 +73,7 @@ namespace codingame.dont.panic
 {
 	using System;
 	using System.Collections.Generic;
+	using System.Linq;
 
 	public class DriveParams
 	{
@@ -110,11 +111,26 @@ namespace codingame.dont.panic
 				_elevators.Add(new Elevator(readLine()));
 			}
 		}
+
+		public Elevator GetClosestElevator(int cloneFloor, int clonePosition)
+		{
+			var elevatorsOnFloor = Elevators
+				.Where(e => e.Floor == cloneFloor)
+				.ToArray();
+			var minDistance = elevatorsOnFloor
+				.Min(e => e.GetDistance(clonePosition));
+			return elevatorsOnFloor
+				.Select(e => new { Elevator = e, Distance = e.GetDistance(clonePosition) })
+				.First(o => o.Distance == minDistance)
+				.Elevator;
+		}
 	}
 }
 
 namespace codingame.dont.panic
 {
+	using System;
+
 	public class Elevator
 	{
 		public Elevator(string readLine)
@@ -131,6 +147,11 @@ namespace codingame.dont.panic
 		public override string ToString()
 		{
 			return string.Format("{0} {1}", Floor, Position);
+		}
+
+		public int GetDistance(int position)
+		{
+			return Math.Abs(Position - position);
 		}
 	}
 }
@@ -196,7 +217,7 @@ namespace codingame.dont.panic
 		{
 			return _driveParams.ExitFloor == CloneFloor
 				? _driveParams.ExitPosition
-				: _driveParams.Elevators.First(e => e.Floor == CloneFloor).Position;
+				: _driveParams.GetClosestElevator(CloneFloor, ClonePosition).Position;
 		}
 
 		public bool ShouldCloneReverse(Direction referenceDirection)

@@ -64,5 +64,16 @@
 			Check.That(driveParams.Elevators.Last().Floor).Equals(1);
 			Check.That(driveParams.Elevators.Last().Position).Equals(3);
 		}
+
+		[TestMethod]
+		public void Given2ElevatorsOnSameFloorWhenGetClosestElevatorThenReturnTheClosest()
+		{
+			var elevators = new[] { new Elevator("0 4"), new Elevator("1 0"), new Elevator("1 7") };
+			var driveParams = new DriveParams(new ConsoleSimulator(3, 9, 2, 8, 3, elevators).ReadLine);
+
+			var closestElevator = driveParams.GetClosestElevator(1, 3);
+
+			Check.That(closestElevator.ToString()).IsEqualTo("1 0");
+		}
 	}
 }

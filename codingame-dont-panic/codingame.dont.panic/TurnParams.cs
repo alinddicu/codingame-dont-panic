@@ -44,7 +44,7 @@
 		{
 			return _driveParams.ExitFloor == CloneFloor
 				? _driveParams.ExitPosition
-				: _driveParams.Elevators.First(e => e.Floor == CloneFloor).Position;
+				: _driveParams.GetClosestElevator(CloneFloor, ClonePosition).Position;
 		}
 
 		public bool ShouldCloneReverse(Direction referenceDirection)

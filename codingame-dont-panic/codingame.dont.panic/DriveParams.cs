@@ -2,6 +2,7 @@
 {
 	using System;
 	using System.Collections.Generic;
+	using System.Linq;
 
 	public class DriveParams
 	{
@@ -40,9 +41,17 @@
 			}
 		}
 
-		private Elevator GetClosestElevator(int cloneFloor, int clonePosition)
+		public Elevator GetClosestElevator(int cloneFloor, int clonePosition)
 		{
-			throw new NotImplementedException();
+			var elevatorsOnFloor = Elevators
+				.Where(e => e.Floor == cloneFloor)
+				.ToArray();
+			var minDistance = elevatorsOnFloor
+				.Min(e => e.GetDistance(clonePosition));
+			return elevatorsOnFloor
+				.Select(e => new { Elevator = e, Distance = e.GetDistance(clonePosition) })
+				.First(o => o.Distance == minDistance)
+				.Elevator;
 		}
 	}
 }
