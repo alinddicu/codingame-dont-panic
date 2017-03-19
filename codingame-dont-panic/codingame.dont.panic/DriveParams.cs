@@ -39,5 +39,9 @@
 				_elevators.Add(new Elevator(readLine()));
 			}
 		}
+
+		private Elevator GetClosestElevator(int cloneFloor, int clonePosition)
+		{
+		}
 	}
 }

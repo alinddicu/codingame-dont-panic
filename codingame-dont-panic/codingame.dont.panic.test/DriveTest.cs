@@ -27,6 +27,28 @@
 		// CloneDirection = inputs[2] = direction of the leading clone: LEFT or RIGHT
 
 		[TestMethod]
+		public void Given2ElevatorsPerFloorWhenRunThenBlockToPickTheClosestOne()
+		{
+			// 22222222E
+			// e11111e11
+			// 0000e0000<-
+			var consoleSimulator = new ConsoleSimulator(
+				"2 9 99 2 8 3 0 3",
+				"0 4",
+				"1 0",
+				"1 6",
+				"0 8 LEFT", "0 7 LEFT", "0 6 LEFT", "0 5 LEFT", "0 4 LEFT",
+				"1 4 LEFT", "1 3 LEFT",
+				"1 0 EXIT");
+
+			var driveOuput = RunDrive(consoleSimulator);
+
+			Check.That(driveOuput).ContainsExactly(
+				"WAIT", "WAIT", "WAIT", "WAIT", "WAIT",
+				"WAIT", "BLOCK");
+		}
+
+		[TestMethod]
 		public void Given2By4DriveWith1ElevatorWithRightUTurnWhenRunThenBlock1StCloneImmediately()
 		{
 			// 111E
