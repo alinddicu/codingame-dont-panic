@@ -10,11 +10,6 @@ namespace codingame.dont.panic.test
 		private readonly List<string> _writtenLines = new List<string>();
 		private int _readLinesCount;
 
-		public static ConsoleSimulator Create()
-		{
-			return new ConsoleSimulator("8 7 6 5 4 3 2 0");
-		}
-
 		public ConsoleSimulator(
 			int floorCount,
 			int driveWidth,
@@ -50,7 +45,7 @@ namespace codingame.dont.panic.test
 				2,
 				elevatorsCount);
 			var linesToRead = new List<string> { generalParams };
-			linesToRead.AddRange(elevators != null ? elevators.Select(e => e.ToString()) : Enumerable.Empty<string>());
+			linesToRead.AddRange(elevators?.Select(e => e.ToString()) ?? Enumerable.Empty<string>());
 			return linesToRead;
 		}
 
