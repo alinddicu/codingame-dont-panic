@@ -24,7 +24,7 @@
 			int elevatorsCount,
 			params Elevator[] elevators)
 		{
-			var simulator = new ConsoleSimulator(
+			var simulator = new DontPanicConsoleSimulator(
 				floorCount,
 				driveWidth,
 				exitFloor,
@@ -69,7 +69,7 @@
 		public void Given2ElevatorsOnSameFloorWhenGetClosestElevatorThenReturnTheClosest()
 		{
 			var elevators = new[] { new Elevator("0 4"), new Elevator("1 0"), new Elevator("1 7") };
-			var driveParams = new DriveParams(new ConsoleSimulator(3, 9, 2, 8, 3, elevators).ReadLine);
+			var driveParams = new DriveParams(new DontPanicConsoleSimulator(3, 9, 2, 8, 3, elevators).ReadLine);
 
 			var closestElevator = driveParams.GetClosestElevator(1, 3);
 

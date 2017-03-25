@@ -58,6 +58,8 @@
   <ItemGroup>
     <Compile Include="ConsoleSimulator.cs" />
     <Compile Include="ConsoleSimulatorTest.cs" />
+    <Compile Include="DontPanicConsoleSimulator.cs" />
+    <Compile Include="DontPanicConsoleSimulatorTest.cs" />
     <Compile Include="DriveParamsTest.cs" />
     <Compile Include="DriveTest.cs" />
     <Compile Include="ElevatorTest.cs" />

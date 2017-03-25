@@ -39,7 +39,7 @@
 		[TestMethod]
 		public void GivenConsoleSimulatorWithParametersWhenCreateThenValuesOfDriveParamsAreCorrect()
 		{
-			var simulator = new ConsoleSimulator(
+			var simulator = new DontPanicConsoleSimulator(
 				8,
 				7,
 				5,
