@@ -53,6 +53,12 @@
   <ItemGroup>
     <None Include="app.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\codingame-common\codingame.common\codingame.common.build.submit.file\codingame.common.build.submit.file.csproj">
+      <Project>{d461583d-276a-4452-917c-6a7edebe3cdf}</Project>
+      <Name>codingame.common.build.submit.file</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
