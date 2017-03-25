@@ -70,10 +70,6 @@
     <Compile Include="TurnParamsTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\codingame-common\codingame.common\codingame.common.test\codingame.common.test.csproj">
-      <Project>{939d99ad-6d21-48af-a150-3ddd1d7ee9fd}</Project>
-      <Name>codingame.common.test</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\codingame-common\codingame.common\codingame.common\codingame.common.csproj">
       <Project>{22152da3-c08d-40aa-b086-8c48c45bd08c}</Project>
       <Name>codingame.common</Name>

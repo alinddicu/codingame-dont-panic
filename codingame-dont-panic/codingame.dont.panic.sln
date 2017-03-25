@@ -11,9 +11,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "codingame.dont.panic.build"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "codingame.common", "..\..\codingame-common\codingame.common\codingame.common\codingame.common.csproj", "{22152DA3-C08D-40AA-B086-8C48C45BD08C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "codingame.common.test", "..\..\codingame-common\codingame.common\codingame.common.test\codingame.common.test.csproj", "{939D99AD-6D21-48AF-A150-3DDD1D7EE9FD}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "codingame.common.build.submit.file", "..\..\codingame-common\codingame.common\codingame.common.build.submit.file\codingame.common.build.submit.file.csproj", "{D461583D-276A-4452-917C-6A7EDEBE3CDF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "common", "common", "{4CBC6151-4DB7-4230-A9FC-E4D4DCBBBF25}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,10 +37,6 @@ Global
 		{22152DA3-C08D-40AA-B086-8C48C45BD08C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{22152DA3-C08D-40AA-B086-8C48C45BD08C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{22152DA3-C08D-40AA-B086-8C48C45BD08C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{939D99AD-6D21-48AF-A150-3DDD1D7EE9FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{939D99AD-6D21-48AF-A150-3DDD1D7EE9FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{939D99AD-6D21-48AF-A150-3DDD1D7EE9FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{939D99AD-6D21-48AF-A150-3DDD1D7EE9FD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D461583D-276A-4452-917C-6A7EDEBE3CDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D461583D-276A-4452-917C-6A7EDEBE3CDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D461583D-276A-4452-917C-6A7EDEBE3CDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -48,5 +44,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{22152DA3-C08D-40AA-B086-8C48C45BD08C} = {4CBC6151-4DB7-4230-A9FC-E4D4DCBBBF25}
+		{D461583D-276A-4452-917C-6A7EDEBE3CDF} = {4CBC6151-4DB7-4230-A9FC-E4D4DCBBBF25}
 	EndGlobalSection
 EndGlobal
