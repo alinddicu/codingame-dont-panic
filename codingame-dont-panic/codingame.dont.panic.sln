@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "codingame.dont.panic.test",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "codingame.dont.panic.build", "codingame.dont.panic.build\codingame.dont.panic.build.csproj", "{5F579717-D55F-47D6-82C3-9AC1A1D7CDFF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "codingame.common", "..\..\codingame-common\codingame.common\codingame.common\codingame.common.csproj", "{22152DA3-C08D-40AA-B086-8C48C45BD08C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "codingame.common.test", "..\..\codingame-common\codingame.common\codingame.common.test\codingame.common.test.csproj", "{939D99AD-6D21-48AF-A150-3DDD1D7EE9FD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{5F579717-D55F-47D6-82C3-9AC1A1D7CDFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5F579717-D55F-47D6-82C3-9AC1A1D7CDFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5F579717-D55F-47D6-82C3-9AC1A1D7CDFF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22152DA3-C08D-40AA-B086-8C48C45BD08C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22152DA3-C08D-40AA-B086-8C48C45BD08C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22152DA3-C08D-40AA-B086-8C48C45BD08C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22152DA3-C08D-40AA-B086-8C48C45BD08C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{939D99AD-6D21-48AF-A150-3DDD1D7EE9FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{939D99AD-6D21-48AF-A150-3DDD1D7EE9FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{939D99AD-6D21-48AF-A150-3DDD1D7EE9FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{939D99AD-6D21-48AF-A150-3DDD1D7EE9FD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

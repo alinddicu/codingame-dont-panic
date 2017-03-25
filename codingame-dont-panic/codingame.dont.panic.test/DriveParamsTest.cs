@@ -1,6 +1,7 @@
 ﻿namespace codingame.dont.panic.test
 {
 	using System.Linq;
+	using common;
 	using NFluent;
 	using Microsoft.VisualStudio.TestTools.UnitTesting;
 	using panic;
