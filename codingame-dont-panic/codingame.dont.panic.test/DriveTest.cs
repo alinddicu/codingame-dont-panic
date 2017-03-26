@@ -39,8 +39,7 @@
 				"1 0",
 				"1 5",
 				"0 8 LEFT", "0 7 LEFT", "0 6 LEFT", "0 5 LEFT", "0 4 LEFT",
-				"1 4 LEFT", "1 3 LEFT",
-				"1 0 EXIT");
+				"1 4 LEFT", "1 3 LEFT");
 
 			var driveOuput = RunDrive(consoleSimulator);
 
@@ -57,8 +56,7 @@
 			var consoleSimulator = new ConsoleSimulator(
 				"2 4 99 1 3 2 0 1",
 				"0 2",
-				"0 3 LEFT", "0 2 LEFT", "1 2 LEFT", "1 1 LEFT",
-				"1 0 EXIT");
+				"0 3 LEFT", "0 2 LEFT", "1 2 LEFT", "1 1 LEFT");
 
 			var driveOuput = RunDrive(consoleSimulator);
 
@@ -74,8 +72,7 @@
 			var consoleSimulator = new ConsoleSimulator(
 				"2 4 99 1 0 2 0 1",
 				"0 1",
-				"0 0 RIGHT", "0 1 RIGHT", "1 1 RIGHT", "1 2 RIGHT",
-				"1 2 EXIT");
+				"0 0 RIGHT", "0 1 RIGHT", "1 1 RIGHT", "1 2 RIGHT");
 
 			var driveOuput = RunDrive(consoleSimulator);
 
@@ -92,8 +89,7 @@
 				"2 4 99 1 3 2 0 1",
 				"0 1",
 				"0 3 LEFT", "0 2 LEFT", "0 1 LEFT", "1 1 LEFT", "1 0 LEFT",
-				"0 3 LEFT", "0 2 LEFT", "0 1 LEFT", "1 1 LEFT", "1 2 RIGHT", "1 3 RIGHT",
-				"1 3 EXIT");
+				"0 3 LEFT", "0 2 LEFT", "0 1 LEFT", "1 1 LEFT", "1 2 RIGHT", "1 3 RIGHT");
 
 			var driveOuput = RunDrive(consoleSimulator);
 
@@ -112,8 +108,7 @@
 				"2 3 10 1 0 2 0 1",
 				"0 1",
 				"0 0 RIGHT", "0 1 RIGHT", "1 1 RIGHT", "1 2 RIGHT",
-				"0 0 RIGHT", "0 1 RIGHT", "1 1 LEFT",
-				"1 0 EXIT");
+				"0 0 RIGHT", "0 1 RIGHT", "1 1 LEFT");
 
 			var driveOuput = RunDrive(consoleSimulator);
 
@@ -131,8 +126,7 @@
 				"0 0 RIGHT",
 				"0 1 RIGHT",
 				"0 2 RIGHT",
-				"0 3 RIGHT",
-				"0 4 EXIT");
+				"0 3 RIGHT");
 
 			var driveOuput = RunDrive(consoleSimulator);
 

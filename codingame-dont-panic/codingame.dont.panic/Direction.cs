@@ -3,7 +3,6 @@
 	public enum Direction
 	{
 		LEFT,
-		RIGHT,
-		EXIT
+		RIGHT
 	}
 }

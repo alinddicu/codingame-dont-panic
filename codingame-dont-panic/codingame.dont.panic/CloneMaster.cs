@@ -13,7 +13,7 @@
 			_turnDecisions = turnDecisionsFactory.Create();
 		}
 
-		public TurnDecision.TurnDecision Decide(TurnParams turnParams)
+		public TurnDecision.TurnDecision Run(TurnParams turnParams)
 		{
 			return _turnDecisions
 				.First(td => td.CanDecide(turnParams))

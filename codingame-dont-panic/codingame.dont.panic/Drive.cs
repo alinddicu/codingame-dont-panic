@@ -1,6 +1,7 @@
 ﻿namespace codingame.dont.panic
 {
 	using System;
+	using codingame_common;
 	using TurnDecision;
 
 	public class Drive
@@ -22,14 +23,16 @@
 			// game loop
 			while (true)
 			{
-				var turnParams = new TurnParams(_readLine(), driveParams);
-				if (turnParams.CloneDirection == Direction.EXIT)
+				try
+				{
+					var turnParams = new TurnParams(_readLine(), driveParams);
+					var decision = drive.Run(turnParams);
+					_writeLine(decision); // action: WAIT or BLOCK
+				}
+				catch (NoMoreLinesToReadException)
 				{
 					break;
 				}
-
-				var decision = drive.Decide(turnParams);
-				_writeLine(decision); // action: WAIT or BLOCK
 			}
 		}
 	}
