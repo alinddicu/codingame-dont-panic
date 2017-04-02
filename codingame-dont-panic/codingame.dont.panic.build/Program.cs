@@ -1,13 +1,14 @@
 ﻿namespace codingame.dont.panic.build
 {
+	using System.IO;
 	using common.build.submit.file;
 
 	public class Program
 	{
 		public static void Main(string[] args)
 		{
-			const string sourceFolderPath = "../../../codingame.dont.panic/";
-			const string targetFilePath = "../../codingame.dont.panic.txt";
+			var sourceFolderPath = new DirectoryInfo("../../../codingame.dont.panic/");
+			var targetFilePath = new FileInfo("../../codingame.dont.panic.txt");
 			new BuildSubmitFile().Build(sourceFolderPath, targetFilePath);
 		}
 	}
