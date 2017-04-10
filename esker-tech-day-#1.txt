@@ -6,6 +6,7 @@ Intro:
 		a. Brief intro of the challenge : drive, turn, clone actions, one exited clone to win
 		b. https://www.codingame.com/ide/puzzle/don't-panic-episode-1
 	3. Program.cs = 1 file : very clutered!!!
+	4. Algorithm and clean code exercise.
 		
 Don't panic episode 1
 
@@ -85,7 +86,7 @@ I. Final code
 	2. Solution overlook:
 		a. Drive class: business connector
 		b. TurnParams: main logic
-		c. TurnParamsTest: one logic at a time
+		c. TurnParamsTest: unit testing one logic at a time
 	3. TurnDecision.EXIT replaced by NoMoreLinesToReadException
 	4. codingame.common.build.submit.file
 		a. load referenced projects
@@ -105,15 +106,14 @@ Conclusion:
 			2. Very fast (tenths of miliseconds...)
 		c. Non-regression
 	3. Tools:
-		a. Common: VS, git (github)
-		b. Resharper (defines a uniform style over code):
+		a. Resharper (defines a uniform style over code):
 			1. Macros (ctorp, ctorf)
 			2. Tips (readonly...)
 			3. Shourtcuts
 			4. Refactoring (rename...)
 			5. Instant code analysis
-		c. Linq
-		d. NFluent (Nuget) : simple, fluent assertions (simple types, collections, exceptions, async)
-		e. MsTest:
+		b. Linq
+		c. NFluent (Nuget) : simple, fluent assertions (simple types, collections, exceptions, async)
+		d. MsTest:
 			1. Unit test manager
 			2. Code coverage analyser
