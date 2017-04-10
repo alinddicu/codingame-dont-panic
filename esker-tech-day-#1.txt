@@ -30,7 +30,8 @@ A. "win with crappy code coverage"
 
 B. "refactored CloneMaster.Decide into implementations ofTurnDecisionBase"
 	1. git checkout 345e19ff30f494c920a9a89ffccf1a17f712524f
-	2. Presentation focus : TurnDecisionsFactory > CloneMaster > TurnDecisionBase
+	2. Strategy pattern to decide turn decision logic.
+	3. Presentation focus : TurnDecisionsFactory > CloneMaster > TurnDecisionBase
 		a. logic was divided, but :
 			1. Not unit tested
 			2. Technical logic in descendants of TurnDecisionBase
