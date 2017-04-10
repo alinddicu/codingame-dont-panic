@@ -1,3 +1,124 @@
-# codingame-dont-panic
+Intro:
+	1. Coding game.
+	2. Coding game example: 
+		a. Brief intro of the challenge : drive, turn, clone actions, one exited clone to win
+		b. https://www.codingame.com/ide/puzzle/don't-panic-episode-1
+	3. Program.cs = 1 file : very clutered!!!
+		
+Don't panic episode
 
-https://www.codingame.com/ide/puzzle/don't-panic-episode-1
+A. "win with crappy code coverage"
+	1. git checkout d2912dcb33cf074f671a6a96b55e4e57426c2b3e
+	2. Model : Elevator, DriveParams, TurnParams, CloneMaster, Drive, TurnDecision, Direction
+	3. Tests : 
+		a. DriveTest : acceptance tests, unit tests.
+		b. ElevatorTest, DriveParamsTest, TurnParamsTest.
+		c. Tools :
+			1. ConsoleSimulator with ConsoleSimulatorTest
+			2. Direction.EXIT
+	4. DriveTest :
+		a. acceptance tests
+		b. still, hard to follow
+	5. CloneMaster
+		a. complex, hard to read
+		b. CloneMaster.Decide : 5 ifs with same return type
+		c. logic is hidden in technical code
+		----> needed a dedicated "space" to express the business logic
+
+B. "refactored CloneMaster.Decide into implementations ofTurnDecisionBase"
+	1. git checkout 345e19ff30f494c920a9a89ffccf1a17f712524f
+	2. Presentation focus : TurnDecisionsFactory > CloneMaster > TurnDecisionBase
+		a. logic was divided, but :
+			1. Not unit tested
+			2. Technical logic in descendants of TurnDecisionBase
+			3. TurnDecisionBase : too many statics!
+		b. lots of tests to write ?!
+			1. Duplicate code!
+			2. Code symetries!
+			
+C. Refactoring & unit testing
+	0. Lazyness is great!
+	1. statics from TurnDecisionBase -> member methods with simple unit tests
+		- "Refactored code into TurnDecisionBase.IsHeadingInOppositeDirection"
+		- "Refactored code into TurnDecisionBase.Are0ClonesBlockedOnFloor"
+		- "extracted code to TurnDecisionBase.IsNearPreviousElevator"
+		- "IsHeadingInOppositeDirection is now a member of TurnParams"
+		- "moved IsCloneNearPreviousElevator into TurnParams"
+		- ""
+	2. removed code : "removed check of clone neing on the current floor"
+	
+D. "created build and expanded one class per file"
+	1. git checkout d5ee7bfa45cbbc0f579c389ff549b7558673ac16
+	2. Build project : codingame.dont.panic.build
+	3. Separate files : clearer business logic
+	
+E. "100% coverage on TurnParams" - false!
+	1. git checkout bfba2d1ba0fdbc18381194a73472f2702ac75d28
+	2. Business logic disperses to business objects:
+		a. TurnParams
+		b. BlockCloneIfGoingLeftAndElevatorIsOnRight
+
+F. "no need to check Are0ClonesBlockedOnFloor" & "removed clonesBlockedPerFloor array"
+	1. Removed useless code detectected by:
+		a. Unit tests &	100% code coverage
+		c. Code analysis
+		d. Brutalizing code and running unit tests
+			1. Feature not covered by specific unit tests & 100% code coverage -> probably useless code
+		
+G. "Fully covered TurnParams" by TurnParamsTest only!!!
+	1. git checkout 500f5d5415df1af82c5a64561659fd548b826c47
+	2. Business logic disperses to business objects:
+		a. TurnParams
+		b. TurnDecisionBase
+		c. BlockCloneBeforeColision
+	3. Removed code duplication :
+		a. BlockCloneIfGoingLeftAndElevatorIsOnRight
+		b. BlockCloneIfGoingLeftAndExitIsOnRight
+		c. BlockCloneIfGoingRightAndElevatorIsOnLeft
+		d. BlockCloneIfGoingRightAndExitIsOnLeft
+		e. to BlockCloneIfGoingOppositeOfObjective
+
+I. Final code
+	1. git checkout bc5f68552007acc07d70728381dc7349db1873c6
+	2. Solution overlook:
+		a. Drive class
+	3. TurnDecision.EXIT replaced by NoMoreLinesToReadException
+	4. codingame.common.build.submit.file
+		a. load referenced projects
+		
+
+Conclusion:
+	1. Code design : "Design fullfills a need"
+		a. Feature : client need first
+		b. Readability (maintainance) : business logic > technical expression
+		c. Non-regression : tests
+	2. Tests :
+		a. Acceptance tests (feature):
+			1. High level
+			2. Readability!?
+		b. Unit tests
+			1. Test a unit (what's a unit?), one service at a time, one scenario at a time
+			2. Very fast (tenths of miliseconds...)
+		c. Non-regression
+	3. Tools:
+		a. Common: VS, git (github)
+		b. Resharper (defines a uniform style over code):
+			1. Macros (ctorp, ctorf)
+			2. Tips (readonly...)
+			3. Shourtcuts
+			4. Refactoring (rename...)
+			5. Instant code analysis
+		c. Linq
+		d. NFluent (Nuget) : simple, fluent assertions (simple types, collections, exceptions, async)
+		e. MsTest:
+			1. Unit test manager
+			2. Code coverage analyser
+		
+		
+		
+	
+	
+	
+	
+	
+	
