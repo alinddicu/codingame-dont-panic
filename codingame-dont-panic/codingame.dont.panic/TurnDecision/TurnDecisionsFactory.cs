@@ -4,7 +4,7 @@
 
 	public class TurnDecisionsFactory
 	{
-		public IEnumerable<TurnDecisionBase> Create()
+		public IEnumerable<ITurnDecision> Create()
 		{
 			yield return new BlockCloneBeforeColision();
 			yield return new BlockCloneIfGoingOppositeOfObjective(Direction.LEFT);

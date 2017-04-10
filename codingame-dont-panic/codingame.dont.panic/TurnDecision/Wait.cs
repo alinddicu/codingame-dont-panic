@@ -1,13 +1,13 @@
 ﻿namespace codingame.dont.panic.TurnDecision
 {
-	public class Wait : TurnDecisionBase
+	public class Wait : ITurnDecision
 	{
-		public override bool CanDecide(TurnParams turnParams)
+		public bool CanDecide(TurnParams turnParams)
 		{
 			return true;
 		}
 
-		public override TurnDecision Decide(TurnParams turnParams)
+		public TurnDecision Decide(TurnParams turnParams)
 		{
 			return TurnDecision.WAIT;
 		}

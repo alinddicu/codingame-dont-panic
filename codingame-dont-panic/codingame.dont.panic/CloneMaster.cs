@@ -6,7 +6,7 @@
 
 	public class CloneMaster
 	{
-		private readonly IEnumerable<TurnDecisionBase> _turnDecisions;
+		private readonly IEnumerable<ITurnDecision> _turnDecisions;
 
 		public CloneMaster(DriveParams driveParams, TurnDecisionsFactory turnDecisionsFactory)
 		{

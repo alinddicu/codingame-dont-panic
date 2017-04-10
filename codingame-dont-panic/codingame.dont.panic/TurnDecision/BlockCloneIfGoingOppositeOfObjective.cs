@@ -1,6 +1,6 @@
 ﻿namespace codingame.dont.panic.TurnDecision
 {
-	public class BlockCloneIfGoingOppositeOfObjective : TurnDecisionBase
+	public class BlockCloneIfGoingOppositeOfObjective : ITurnDecision
 	{
 		private readonly Direction _refereDirection;
 
@@ -9,15 +9,15 @@
 			_refereDirection = refereDirection;
 		}
 
-		public override bool CanDecide(TurnParams turnParams)
+		public bool CanDecide(TurnParams turnParams)
 		{
 			return turnParams.ShouldCloneReverse(_refereDirection)
 					&& turnParams.IsCloneNearPreviousElevator(_refereDirection);
 		}
 
-		public override TurnDecision Decide(TurnParams turnParams)
+		public TurnDecision Decide(TurnParams turnParams)
 		{
-			return BlockClone(turnParams);
+			return TurnDecision.BLOCK;
 		}
 	}
 }

@@ -1,15 +1,15 @@
 ﻿namespace codingame.dont.panic.TurnDecision
 {
-	public class BlockCloneBeforeColision : TurnDecisionBase
+	public class BlockCloneBeforeColision : ITurnDecision
 	{
-		public override bool CanDecide(TurnParams turnParams)
+		public bool CanDecide(TurnParams turnParams)
 		{
 			return turnParams.IsColision();
 		}
 
-		public override TurnDecision Decide(TurnParams turnParams)
+		public TurnDecision Decide(TurnParams turnParams)
 		{
-			return BlockClone(turnParams);
+			return TurnDecision.BLOCK;
 		}
 	}
 }
