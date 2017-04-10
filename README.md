@@ -79,7 +79,7 @@ G. "Fully covered TurnParams" by TurnParamsTest only!!!
 		e. to BlockCloneIfGoingOppositeOfObjective
 
 I. Final code
-	1. git checkout bc5f68552007acc07d70728381dc7349db1873c6
+	1. git checkout master
 	2. Solution overlook:
 		a. Drive class
 	3. TurnDecision.EXIT replaced by NoMoreLinesToReadException
