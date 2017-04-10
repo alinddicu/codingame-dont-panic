@@ -83,7 +83,9 @@ G. "Fully covered TurnParams" by TurnParamsTest only!!!
 I. Final code
 	1. git checkout master
 	2. Solution overlook:
-		a. Drive class
+		a. Drive class: business connector
+		b. TurnParams: main logic
+		c. TurnParamsTest: one logic at a time
 	3. TurnDecision.EXIT replaced by NoMoreLinesToReadException
 	4. codingame.common.build.submit.file
 		a. load referenced projects
