@@ -5,7 +5,7 @@ Intro:
 		b. https://www.codingame.com/ide/puzzle/don't-panic-episode-1
 	3. Program.cs = 1 file : very clutered!!!
 		
-Don't panic episode
+Don't panic episode 1
 
 A. "win with crappy code coverage"
 	1. git checkout d2912dcb33cf074f671a6a96b55e4e57426c2b3e
