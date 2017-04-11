@@ -35,7 +35,7 @@ B. "refactored CloneMaster.Decide into implementations ofTurnDecisionBase"
 		a. logic was divided, but :
 			1. Not unit tested
 			2. Technical logic in descendants of TurnDecisionBase
-			3. TurnDecisionBase : too many statics!
+			3. TurnDecisionBase : too many statics! Statics are not objects members...
 		b. lots of unit tests to write ?!
 			1. Duplicated code!
 			2. Code symetries!
@@ -72,7 +72,7 @@ F. "no need to check Are0ClonesBlockedOnFloor" & "removed clonesBlockedPerFloor 
 G. "Fully covered TurnParams" by TurnParamsTest only!!!
 	1. git checkout 500f5d5415df1af82c5a64561659fd548b826c47
 	2. Business logic disperses to business objects:
-		a. TurnParams
+		a. TurnParams -> a "business center"
 		b. TurnDecisionBase
 		c. BlockCloneBeforeColision
 	3. Removed code duplication :
