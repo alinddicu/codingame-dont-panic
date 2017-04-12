@@ -6,16 +6,16 @@
 
 	public class CloneMaster
 	{
-		private readonly IEnumerable<ITurnDecision> _turnDecisions;
+		private readonly IEnumerable<ITurnDecision> _turnPossibleDecisions;
 
-		public CloneMaster(DriveParams driveParams, TurnDecisionsFactory turnDecisionsFactory)
+		public CloneMaster(TurnDecisionsFactory turnDecisionsFactory)
 		{
-			_turnDecisions = turnDecisionsFactory.Create();
+			_turnPossibleDecisions = turnDecisionsFactory.Create();
 		}
 
-		public TurnDecision.TurnDecision Run(TurnParams turnParams)
+		public TurnDecision.TurnDecision Decide(TurnParams turnParams)
 		{
-			return _turnDecisions
+			return _turnPossibleDecisions
 				.First(td => td.CanDecide(turnParams))
 				.Decide(turnParams);
 		}

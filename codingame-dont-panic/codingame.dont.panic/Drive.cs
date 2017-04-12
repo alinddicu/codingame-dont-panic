@@ -18,7 +18,7 @@
 		public void Run()
 		{
 			var driveParams = new DriveParams(_readLine);
-			var drive = new CloneMaster(driveParams, new TurnDecisionsFactory());
+			var cloneMaster = new CloneMaster(new TurnDecisionsFactory());
 
 			// game loop
 			while (true)
@@ -26,7 +26,7 @@
 				try
 				{
 					var turnParams = new TurnParams(_readLine(), driveParams);
-					var decision = drive.Run(turnParams);
+					var decision = cloneMaster.Decide(turnParams);
 					_writeLine(decision); // action: WAIT or BLOCK
 				}
 				catch (NoMoreLinesToReadException)

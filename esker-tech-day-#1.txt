@@ -6,7 +6,7 @@ Intro:
 		a. Brief intro of the challenge : drive, turn, clone actions, one exited clone to win
 		b. https://www.codingame.com/ide/puzzle/don't-panic-episode-1
 	3. Program.cs = 1 file : very clutered!!!
-	4. Why? A: algorithm and clean code exercise.
+	4. Why? A: algorithm exercise and clean code maintainance.
 		
 Don't panic episode 1
 
@@ -25,10 +25,11 @@ A. "win with crappy code coverage"
 	5. CloneMaster
 		a. complex, hard to read
 		b. CloneMaster.Decide : 5 ifs with same return type
-		c. logic is hidden in technical code
+		c. Acciental complexity (normal when exploring)
+		d. logic is hidden in technical code
 		----> needed a dedicated "space" to express the business logic
 
-B. "refactored CloneMaster.Decide into implementations ofTurnDecisionBase"
+B. "refactored CloneMaster.Decide into implementations of TurnDecisionBase"
 	1. git checkout 345e19ff30f494c920a9a89ffccf1a17f712524f
 	2. Strategy pattern to decide turn decision logic.
 	3. Presentation focus : TurnDecisionsFactory > CloneMaster > TurnDecisionBase
