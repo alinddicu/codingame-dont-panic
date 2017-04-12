@@ -11,7 +11,7 @@
 
 		public bool CanDecide(TurnParams turnParams)
 		{
-			return turnParams.ShouldCloneReverse(_refereDirection)
+			return turnParams.ShouldNextCloneReverse(_refereDirection)
 					&& turnParams.IsCloneNearPreviousElevator(_refereDirection);
 		}
 

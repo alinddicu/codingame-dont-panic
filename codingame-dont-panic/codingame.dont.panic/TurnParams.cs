@@ -6,23 +6,20 @@
 	public class TurnParams
 	{
 		private readonly DriveParams _driveParams;
-
-		public int CloneFloor { get; }
-
-		public int ClonePosition { get; }
-
-		public Direction CloneDirection { get; }
+		private readonly int _leadingCloneFloor;
+		private readonly int _leadingClonePosition;
+		private readonly Direction _leadingCloneDirection;
 
 		public TurnParams(string readLineParams, DriveParams driveParams)
 		{
 			_driveParams = driveParams;
 			var inputs = readLineParams.Split(' ');
 			// floor of the leading clone
-			CloneFloor = int.Parse(inputs[0]);
+			_leadingCloneFloor = int.Parse(inputs[0]);
 			// position of the leading clone on its floor
-			ClonePosition = int.Parse(inputs[1]);
+			_leadingClonePosition = int.Parse(inputs[1]);
 			// referenceDirection of the leading clone: LEFT or RIGHT
-			CloneDirection = (Direction)Enum.Parse(typeof(Direction), inputs[2]);
+			_leadingCloneDirection = (Direction)Enum.Parse(typeof(Direction), inputs[2]);
 		}
 
 		public bool IsColision()
@@ -32,24 +29,24 @@
 
 		private bool IsLeftColision()
 		{
-			return ClonePosition == 0 && CloneDirection == Direction.LEFT;
+			return _leadingClonePosition == 0 && _leadingCloneDirection == Direction.LEFT;
 		}
 
 		private bool IsRightColision()
 		{
-			return ClonePosition + 1 == _driveParams.DriveWidth && CloneDirection == Direction.RIGHT;
+			return _leadingClonePosition + 1 == _driveParams.DriveWidth && _leadingCloneDirection == Direction.RIGHT;
 		}
 
 		private int GetObjectivePosition()
 		{
-			return _driveParams.ExitFloor == CloneFloor
+			return _driveParams.ExitFloor == _leadingCloneFloor
 				? _driveParams.ExitPosition
-				: _driveParams.GetClosestElevator(CloneFloor, ClonePosition).Position;
+				: _driveParams.GetClosestElevator(_leadingCloneFloor, _leadingClonePosition).Position;
 		}
 
-		public bool ShouldCloneReverse(Direction referenceDirection)
+		public bool ShouldNextCloneReverse(Direction referenceDirection)
 		{
-			if (CloneDirection != referenceDirection)
+			if (_leadingCloneDirection != referenceDirection)
 			{
 				return false;
 			}
@@ -57,15 +54,15 @@
 			var objectivePosition = GetObjectivePosition();
 			if (referenceDirection == Direction.RIGHT)
 			{
-				return ClonePosition > objectivePosition;
+				return _leadingClonePosition > objectivePosition;
 			}
 
-			return ClonePosition < objectivePosition;
+			return _leadingClonePosition < objectivePosition;
 		}
 
 		private Elevator GetPreviousFloorElevator()
 		{
-			return _driveParams.Elevators.FirstOrDefault(e => e.Floor == CloneFloor - 1);
+			return _driveParams.Elevators.FirstOrDefault(e => e.Floor == _leadingCloneFloor - 1);
 		}
 
 		public bool IsCloneNearPreviousElevator(Direction referenceDirection)
@@ -73,10 +70,10 @@
 			var previousFloorElevatorPosition = GetPreviousFloorElevator()?.Position;
 			if (referenceDirection == Direction.LEFT)
 			{
-				return previousFloorElevatorPosition - 1 == ClonePosition;
+				return previousFloorElevatorPosition - 1 == _leadingClonePosition;
 			}
 
-			return previousFloorElevatorPosition + 1 == ClonePosition;
+			return previousFloorElevatorPosition + 1 == _leadingClonePosition;
 		}
 	}
 }
