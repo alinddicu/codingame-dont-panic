@@ -7,7 +7,7 @@
 			return true;
 		}
 
-		public TurnDecision Decide(TurnParams turnParams)
+		public TurnDecision Decide()
 		{
 			return TurnDecision.WAIT;
 		}

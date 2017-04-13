@@ -4,6 +4,6 @@
 	{
 		bool CanDecide(TurnParams turnParams);
 
-		TurnDecision Decide(TurnParams turnParams);
+		TurnDecision Decide();
 	}
 }

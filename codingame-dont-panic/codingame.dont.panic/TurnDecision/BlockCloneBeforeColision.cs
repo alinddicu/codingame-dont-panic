@@ -7,7 +7,7 @@
 			return turnParams.IsColision();
 		}
 
-		public TurnDecision Decide(TurnParams turnParams)
+		public TurnDecision Decide()
 		{
 			return TurnDecision.BLOCK;
 		}

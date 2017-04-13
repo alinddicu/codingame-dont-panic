@@ -15,7 +15,7 @@
 					&& turnParams.IsCloneNearPreviousElevator(_refereDirection);
 		}
 
-		public TurnDecision Decide(TurnParams turnParams)
+		public TurnDecision Decide()
 		{
 			return TurnDecision.BLOCK;
 		}
