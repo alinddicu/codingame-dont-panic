@@ -15,7 +15,7 @@
 			var turnParams = new TurnParams("0 0 LEFT", driveParams);
 
 			Check.That(turnDecision.CanDecide(turnParams)).IsTrue();
-			Check.That(turnDecision.Decide(turnParams)).IsEqualTo(TurnDecision.BLOCK);
+			Check.That(turnDecision.Decide()).IsEqualTo(TurnDecision.BLOCK);
 		}
 		
 		[TestMethod]
@@ -26,7 +26,7 @@
 			var turnParams = new TurnParams("0 2 RIGHT", driveParams);
 
 			Check.That(turnDecision.CanDecide(turnParams)).IsTrue();
-			Check.That(turnDecision.Decide(turnParams)).IsEqualTo(TurnDecision.BLOCK);
+			Check.That(turnDecision.Decide()).IsEqualTo(TurnDecision.BLOCK);
 		}
 
 		[TestMethod]

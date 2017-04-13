@@ -15,7 +15,7 @@
 			var turnParams = new TurnParams("1 1 LEFT", driveParams);
 
 			Check.That(turnDecision.CanDecide(turnParams)).IsTrue();
-			Check.That(turnDecision.Decide(turnParams)).IsEqualTo(TurnDecision.BLOCK);
+			Check.That(turnDecision.Decide()).IsEqualTo(TurnDecision.BLOCK);
 		}
 		
 		[TestMethod]

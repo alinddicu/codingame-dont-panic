@@ -17,7 +17,7 @@
 		{
 			return _turnPossibleDecisions
 				.First(td => td.CanDecide(turnParams))
-				.Decide(turnParams);
+				.Decide();
 		}
 	}
 }
